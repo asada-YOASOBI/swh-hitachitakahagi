@@ -371,7 +371,7 @@
       <a href="#faq">FAQ</a>
       <a href="#corporate">法人予約</a>
     </nav>
-    <a href="#book" class="nav-cta en">RESERVE</a>
+    <a href="#book" class="nav-cta en" id="nav-reserve-btn">RESERVE</a>
   </div>
 </header>
 
@@ -503,11 +503,6 @@
     <h2>公式サイトから、空室検索・ご予約。</h2>
     <p>ご予約は公式サイトから。下のボタンから空室確認・お申し込みいただけます。</p>
     <button class="btn-primary en" id="tripla-button">空室を検索する / RESERVE →</button>
-    <div class="tripla-slot en">
-      ▼ ここに tripla の予約ウィジェット／ボタンタグを設置 ▼<br>
-      tripla管理画面で発行したスクリプトを、この位置に貼り付けてください。<br>
-      （ボタン型なら上のボタンの遷移先URLを差し替え／カレンダー型ならこの枠にウィジェットを埋め込み）
-    </div>
   </div>
 </section>
 
@@ -684,18 +679,45 @@
 </div>
 
 <script>
+  // ===== tripla 予約URL生成 =====
+  const TRIPLA_CODE = '019e5d43-ca8e-742a-ab76-6987cc0cc2af';
+  const TRIPLA_BASE = 'https://booking.tripla.jp';
+
+  function getTriplaUrl() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const fmt = d => `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+    return `${TRIPLA_BASE}/booking/result?code=${TRIPLA_CODE}&checkin=${encodeURIComponent(fmt(today))}&checkout=${encodeURIComponent(fmt(tomorrow))}&adults=1&room_count=1&order=price_low_to_high&is_including_occupied=false`;
+  }
+
+  function initTriplaButtons() {
+    const url = getTriplaUrl();
+    // ヘッダー RESERVE
+    const navBtn = document.getElementById('nav-reserve-btn');
+    if(navBtn){ navBtn.href = url; navBtn.target = '_blank'; navBtn.rel = 'noopener'; }
+    // ヒーロー「空室を検索する」
+    const heroBtn = document.querySelector('.hero-actions .btn-primary');
+    if(heroBtn){ heroBtn.href = url; heroBtn.target = '_blank'; heroBtn.rel = 'noopener'; }
+    // 予約CTAバンドのボタン
+    const ctaBtn = document.getElementById('tripla-button');
+    if(ctaBtn){ ctaBtn.onclick = () => window.open(url, '_blank', 'noopener'); }
+    // スマホ下部固定バー
+    const spBtn = document.getElementById('sp-reserve-btn');
+    if(spBtn){ spBtn.href = url; spBtn.target = '_blank'; spBtn.rel = 'noopener'; }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initTriplaButtons);
+  } else {
+    initTriplaButtons();
+  }
+
+  // ===== スクロールリビール =====
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
   },{threshold:.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // tripla 予約ボタン接続ポイント
-  // ① ボタン型: 下の location.href を tripla 発行の予約URLに差し替え
-  // ② ウィジェット型: #book の .tripla-slot に発行スクリプトを設置
-  document.getElementById('tripla-button').addEventListener('click',function(){
-    // location.href = 'https://(triplaの予約URL)';
-    alert('ここに tripla の予約画面を接続します。\n発行されたURL／ウィジェットに差し替えてください。');
-  });
 </script>
 
 </body>
