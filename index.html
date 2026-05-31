@@ -344,6 +344,8 @@
   .reveal{opacity:0;transform:translateY(16px);transition:.5s cubic-bezier(.16,.84,.32,1)}
   .reveal.in{opacity:1;transform:translateY(0)}
 </style>
+<!-- tripla Book -->
+<script async src="https://tripla.jp/sdk/javascript/tripla.min.js" data-triplabot-code="019e5d43-ca8e-742a-ab76-6987cc0cc2af"></script>
 </head>
 <body>
 
@@ -371,7 +373,7 @@
       <a href="#faq">FAQ</a>
       <a href="#corporate">法人予約</a>
     </nav>
-    <a href="#book" class="nav-cta en" id="nav-reserve-btn">RESERVE</a>
+    <a href="#" class="nav-cta en" data-tripla-booking-widget="search">RESERVE</a>
   </div>
 </header>
 
@@ -386,7 +388,7 @@
       ベストレート保証 — 公式サイトからのご予約が一番お得
     </div>
     <div class="hero-actions">
-      <a href="#book" class="btn-primary en">空室を検索する <span class="arr">→</span></a>
+      <a href="#" class="btn-primary en" data-tripla-booking-widget="search">空室を検索する <span class="arr">→</span></a>
       <a href="#access" class="btn-ghost en">ACCESS</a>
     </div>
     <p class="cashless-note">完全キャッシュレス運用です。現金精算はできません。事前カード決済・Amazon Pay・現地電子決済（クレジット／PayPay／交通系IC／QUICPay／iD）をご利用ください。</p>
@@ -502,7 +504,7 @@
     <p class="eyebrow en">Direct Booking</p>
     <h2>公式サイトから、空室検索・ご予約。</h2>
     <p>ご予約は公式サイトから。下のボタンから空室確認・お申し込みいただけます。</p>
-    <button class="btn-primary en" id="tripla-button">空室を検索する / RESERVE →</button>
+    <button class="btn-primary en" data-tripla-booking-widget="search">空室を検索する / RESERVE →</button>
   </div>
 </section>
 
@@ -671,7 +673,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
     アクセス
   </a>
-  <a href="#book" class="sp-reserve" id="sp-reserve-btn">
+  <a href="#" class="sp-reserve" data-tripla-booking-widget="search">
     <span class="best">ベストレート保証・公式が最安</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
     空室を確認・予約する
@@ -679,40 +681,6 @@
 </div>
 
 <script>
-  // ===== tripla 予約URL生成 =====
-  const TRIPLA_CODE = '019e5d43-ca8e-742a-ab76-6987cc0cc2af';
-  const TRIPLA_BASE = 'https://booking.tripla.jp';
-
-  function getTriplaUrl() {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    const fmt = d => `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-    return `${TRIPLA_BASE}/booking/result?code=${TRIPLA_CODE}&checkin=${encodeURIComponent(fmt(today))}&checkout=${encodeURIComponent(fmt(tomorrow))}&adults=1&room_count=1&order=price_low_to_high&is_including_occupied=false`;
-  }
-
-  function initTriplaButtons() {
-    const url = getTriplaUrl();
-    // ヘッダー RESERVE
-    const navBtn = document.getElementById('nav-reserve-btn');
-    if(navBtn){ navBtn.href = url; navBtn.target = '_blank'; navBtn.rel = 'noopener'; }
-    // ヒーロー「空室を検索する」
-    const heroBtn = document.querySelector('.hero-actions .btn-primary');
-    if(heroBtn){ heroBtn.href = url; heroBtn.target = '_blank'; heroBtn.rel = 'noopener'; }
-    // 予約CTAバンドのボタン
-    const ctaBtn = document.getElementById('tripla-button');
-    if(ctaBtn){ ctaBtn.onclick = () => window.open(url, '_blank', 'noopener'); }
-    // スマホ下部固定バー
-    const spBtn = document.getElementById('sp-reserve-btn');
-    if(spBtn){ spBtn.href = url; spBtn.target = '_blank'; spBtn.rel = 'noopener'; }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initTriplaButtons);
-  } else {
-    initTriplaButtons();
-  }
-
   // ===== スクロールリビール =====
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
