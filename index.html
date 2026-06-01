@@ -105,6 +105,7 @@
     {"@type": "Question", "name": "料金はいくらですか？", "acceptedAnswer": {"@type": "Answer", "text": "ダブルルーム1泊6,000円からで、宿泊日や空室状況により変動します。全14室、1〜2名でご利用いただけます。"}},
     {"@type": "Question", "name": "現金は使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "完全キャッシュレス運用のため現金は利用できません。事前カード決済、Amazon Pay、または現地でのクレジットカード、PayPay、交通系IC、QUICPay、iDなどの電子決済を利用できます。"}},
     {"@type": "Question", "name": "チェックイン方法は？", "acceptedAnswer": {"@type": "Answer", "text": "館内タブレットでセルフチェックインの手続きを行い、お部屋ごとに発行されるスマートロックの認証番号で入室します。チェックインは16:00、チェックアウトは10:00です。"}},
+    {"@type": "Question", "name": "アメニティは何がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "ヘアブラシ、カミソリ、ボディタオル、コットンセット、シェービングクリーム、綿棒などをご用意しています。化粧水・乳液はKOSÉ「雪肌精」をご利用いただけます。"}},
     {"@type": "Question", "name": "法人予約・長期滞在はできますか？", "acceptedAnswer": {"@type": "Answer", "text": "可能です。工事・出張・研修など複数名・長期のご宿泊は法人予約フォームよりお問い合わせください。松久保工業団地など周辺工業エリアの宿泊拠点として利用できます。"}}
   ]
 }
@@ -295,6 +296,28 @@
   .rental-box .lbl{font-family:"Outfit",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.16em;color:#fff;background:var(--navy);padding:.6rem 1.2rem}
   .rental-tags{display:flex;flex-wrap:wrap;gap:0;border-left:1px solid var(--line)}
   .rental-tags span{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:.55rem 1rem;font-size:.82rem;color:var(--ink-soft)}
+
+  /* フロー写真 */
+  .flow-photo{margin-top:1.6rem;display:grid;grid-template-columns:1.3fr 1fr;border:1px solid var(--line-strong);align-items:stretch}
+  @media(max-width:760px){.flow-photo{grid-template-columns:1fr}}
+  .flow-photo img{width:100%;height:100%;object-fit:cover;display:block;min-height:240px}
+  .flow-photo-cap{padding:1.8rem 1.6rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line-strong)}
+  @media(max-width:760px){.flow-photo-cap{border-left:none;border-top:1px solid var(--line-strong)}}
+  .flow-photo-cap .en{font-family:"Outfit",sans-serif;font-size:.74rem;letter-spacing:.16em;color:var(--accent);margin-bottom:.6rem}
+  .flow-photo-cap p:not(.en){color:var(--ink-soft);font-size:.88rem;line-height:1.85}
+
+  /* アメニティ */
+  .amenity-box{margin-top:1.6rem;display:grid;grid-template-columns:1fr 1.1fr;border:1px solid var(--line-strong);align-items:stretch}
+  @media(max-width:760px){.amenity-box{grid-template-columns:1fr}}
+  .amenity-photo{overflow:hidden}
+  .amenity-photo img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+  .amenity-text{padding:1.8rem 1.6rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line-strong)}
+  @media(max-width:760px){.amenity-text{border-left:none;border-top:1px solid var(--line-strong)}}
+  .amenity-text .eyebrow{font-family:"Outfit",sans-serif;font-size:.74rem;letter-spacing:.16em;color:var(--accent);margin-bottom:.5rem;text-transform:uppercase}
+  .amenity-text h3{font-weight:900;font-size:1.2rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.7rem}
+  .amenity-text>p{color:var(--ink-soft);font-size:.88rem;line-height:1.85;margin-bottom:1rem}
+  .amenity-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .amenity-tags span{border:1px solid var(--line);padding:.35rem .7rem;font-size:.76rem;color:var(--ink-soft);background:var(--paper-cool)}
 
   /* アクセス */
   .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line-strong)}
@@ -493,6 +516,13 @@
       <div class="flow-step"><span class="step-no en">02</span><h4>キャッシュレス決済</h4><p>現金精算は行いません。事前決済または現地電子決済をご利用ください。</p></div>
       <div class="flow-step"><span class="step-no en">03</span><h4>セルフチェックイン</h4><p>館内タブレットで手続きし、発行された番号で入室します。</p></div>
     </div>
+    <div class="flow-photo reveal">
+      <img src="チェックインカウンター.png" alt="多言語対応セルフチェックイン端末" loading="lazy">
+      <div class="flow-photo-cap">
+        <p class="en">Self Check-in</p>
+        <p>日本語・英語・中国語・韓国語に対応した端末で、フロントに並ばずスムーズにチェックイン。深夜・早朝の到着でも待ち時間なくお部屋へ。</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -513,7 +543,7 @@
       <div>
         <p class="eyebrow">Facilities</p>
         <h2 class="sec-title">長期滞在に必要な設備を揃えています。</h2>
-        <p class="sec-sub">ランドリー、電子レンジ、貸出品など、出張中の身支度と作業を支える設備を用意しています。</p>
+        <p class="sec-sub">ランドリー、電子レンジ、貸出品、アメニティなど、出張中の身支度と作業を支える設備を用意しています。</p>
       </div>
     </div>
     <div class="fac-grid reveal">
@@ -538,6 +568,19 @@
       <div class="lbl en">RENTAL ／ 貸出品</div>
       <div class="rental-tags">
         <span>HDMIケーブル</span><span>LANケーブル</span><span>アイロン</span><span>ズボンプレッサー</span><span>延長コード</span><span>各種充電器</span><span>加湿器</span>
+      </div>
+    </div>
+    <div class="amenity-box reveal">
+      <div class="amenity-photo">
+        <img src="アメニティ.jpg" alt="充実のアメニティ 雪肌精ほか" loading="lazy">
+      </div>
+      <div class="amenity-text">
+        <p class="eyebrow">Amenities</p>
+        <h3>充実のアメニティを、ご自由に。</h3>
+        <p>ヘアブラシ、カミソリ、ボディタオル、コットンセット、シェービングクリーム、綿棒などをご用意。化粧水・乳液はKOSÉ「雪肌精」をご利用いただけます。出張時の荷物を最小限にして、身軽にお越しください。</p>
+        <div class="amenity-tags">
+          <span>ヘアブラシ</span><span>カミソリ</span><span>ボディタオル</span><span>コットンセット</span><span>シェービングクリーム</span><span>化粧水（雪肌精）</span><span>乳液（雪肌精）</span><span>綿棒</span>
+        </div>
       </div>
     </div>
   </div>
@@ -627,6 +670,7 @@
       <details><summary>領収書は発行できますか？</summary><div class="ans">電子決済の明細・予約サイトの発行機能をご利用いただけます。詳細はお問い合わせください。</div></details>
       <details><summary>連泊中の清掃はありますか？</summary><div class="ans">連泊中は3日に1回の通常清掃を基本とし、通常日はゴミ回収とタオル交換を中心とした簡易清掃です。</div></details>
       <details><summary>貸出品は何がありますか？</summary><div class="ans">HDMIケーブル、LANケーブル、アイロン、ズボンプレッサー、延長コード、各種充電器、加湿器などをご用意しています。</div></details>
+      <details><summary>アメニティは何がありますか？</summary><div class="ans">ヘアブラシ、カミソリ、ボディタオル、コットンセット、シェービングクリーム、綿棒などをご用意しています。化粧水・乳液はKOSÉ「雪肌精」をご利用いただけます。</div></details>
       <details><summary>喫煙できますか？</summary><div class="ans">客室内は禁煙です。喫煙は屋外喫煙所をご利用ください。</div></details>
       <details><summary>2名で宿泊できますか？</summary><div class="ans">ダブルルームは1〜2名でご利用いただけます。</div></details>
       <details><summary>法人予約はできますか？</summary><div class="ans">可能です。工事・出張・研修など複数名・長期のご宿泊は、法人予約フォームよりお問い合わせください。</div></details>
