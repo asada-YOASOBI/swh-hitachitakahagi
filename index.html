@@ -256,7 +256,7 @@
   /* 客室 */
   .room-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:0;align-items:stretch;border:1px solid var(--line-strong)}
   @media(max-width:820px){.room-wrap{grid-template-columns:1fr}}
-  .room-gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:minmax(180px,1fr);gap:1px;background:var(--line-strong);border-right:1px solid var(--line-strong)}
+  .room-gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;aspect-ratio:1.02;gap:1px;background:var(--line-strong);border-right:1px solid var(--line-strong)}
   @media(max-width:820px){.room-gallery{border-right:none;border-bottom:1px solid var(--line-strong)}}
   .room-gallery .ph{aspect-ratio:1;border:none}
   .room-gallery .ph.tall{grid-row:span 2;aspect-ratio:auto}
@@ -489,8 +489,8 @@
     <div class="room-wrap reveal">
       <div class="room-gallery">
         <img src="images/room-bed-window.jpg" alt="ダブルルーム ベッドと窓" width="1600" height="1067" loading="lazy" style="grid-row:span 2;width:100%;height:100%;object-fit:cover;display:block">
-        <img src="images/room-overview.png" alt="ダブルルーム 客室全体" width="1448" height="1086" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block">
-        <img src="images/desk-tv.jpg" alt="スマートテレビとワークデスク" width="1448" height="1086" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block">
+        <img src="images/room-overview.png" alt="ダブルルーム 客室全体" width="1448" height="1086" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+        <img src="images/desk-tv.jpg" alt="スマートテレビとワークデスク" width="1448" height="1086" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
       <div class="room-detail">
         <h3>ダブルルーム ／ 全14室</h3>
