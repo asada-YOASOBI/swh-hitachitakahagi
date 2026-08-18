@@ -333,6 +333,24 @@
   .flow-photo-cap .cap-en{font-family:"Outfit",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
   .flow-photo-cap h4{font-weight:900;font-size:1.15rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.6rem}
   .flow-photo-cap p:not(.cap-en){color:var(--ink-soft);font-size:.88rem;line-height:1.85;text-wrap:pretty}
+  .scene-lead{margin-top:1.7rem;display:grid;grid-template-columns:1.3fr 1fr;border:1px solid var(--line-strong);align-items:stretch;background:var(--paper)}
+  @media(max-width:760px){.scene-lead{grid-template-columns:1fr}}
+  .scene-lead img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+  .scene-lead-cap{padding:2rem 1.8rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line-strong)}
+  @media(max-width:760px){.scene-lead-cap{border-left:none;border-top:1px solid var(--line-strong)}}
+  .scene-lead-cap .cap-en{font-family:"Outfit",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
+  .scene-lead-cap h4{font-weight:900;font-size:1.15rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.6rem}
+  .scene-lead-cap p:not(.cap-en){color:var(--ink-soft);font-size:.88rem;line-height:1.85;text-wrap:pretty}
+  .scene-grid{margin-top:1.6rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-strong);border:1px solid var(--line-strong)}
+  @media(max-width:900px){.scene-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.scene-grid{grid-template-columns:1fr}}
+  .scene{background:var(--paper);display:flex;flex-direction:column}
+  .scene img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+  .scene-body{padding:1.25rem 1.15rem 1.45rem}
+  .scene-body .cap-en{font-family:"Outfit",sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem}
+  .scene-body h4{font-weight:900;font-size:1rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.45rem}
+  .scene-body p{color:var(--ink-soft);font-size:.83rem;line-height:1.8;text-wrap:pretty}
+  .scene-note{margin-top:1.1rem;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
 
   /* 予約CTA */
   .book{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line-strong)}
@@ -634,6 +652,62 @@
         <p>日本語・英語・中国語・韓国語に対応した端末で、フロントに並ばずスムーズにチェックイン。深夜・早朝の到着でも待ち時間なくお部屋へ。</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="scenes" data-screen-label="滞在シーン">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx en">—</span>
+      <div>
+        <p class="eyebrow">Stay Scenes</p>
+        <h2 class="sec-title">高萩での一日を、思い浮かべてみてください。</h2>
+        <p class="sec-sub">到着から翌朝の出発まで、当ホテルでの滞在がどんな時間になるかをご紹介します。</p>
+      </div>
+    </div>
+    <div class="scene-lead reveal">
+      <img src="images/scene-night-work.webp" srcset="images/scene-night-work-900.webp 900w, images/scene-night-work.webp 1440w" sizes="(max-width:760px) 100vw, 55vw" alt="夜の客室でデスクに向かい仕事をする様子（イメージ）" width="1440" height="1080" loading="lazy">
+      <div class="scene-lead-cap">
+        <p class="cap-en">Night</p>
+        <h4>夜は、部屋がそのまま仕事場になる。</h4>
+        <p>全室に高速Wi-Fiと有線LAN、ワークデスクを備えています。日中の現場を終えてからの資料づくりやオンライン会議も、部屋を出ずに終えられます。</p>
+      </div>
+    </div>
+    <div class="scene-grid reveal">
+      <div class="scene">
+        <img src="images/scene-checkin.webp" srcset="images/scene-checkin-900.webp 900w, images/scene-checkin.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="タブレット端末でセルフチェックインをする様子（イメージ）" width="1440" height="1080" loading="lazy">
+        <div class="scene-body">
+          <p class="cap-en">Arrival</p>
+          <h4>到着したら、並ばずに。</h4>
+          <p>館内のタブレットで手続きは完了。フロントでの待ち時間はありません。</p>
+        </div>
+      </div>
+      <div class="scene">
+        <img src="images/scene-smartlock.webp" srcset="images/scene-smartlock-900.webp 900w, images/scene-smartlock.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="客室ドアのスマートロックに認証番号を入力する様子（イメージ）" width="1440" height="1080" loading="lazy">
+        <div class="scene-body">
+          <p class="cap-en">Late Night</p>
+          <h4>遅い到着でも、番号ひとつで。</h4>
+          <p>客室はスマートロック。発行された認証番号で、深夜でもそのまま入室できます。</p>
+        </div>
+      </div>
+      <div class="scene">
+        <img src="images/scene-family.webp" srcset="images/scene-family-900.webp 900w, images/scene-family.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="客室のベッドで過ごす親子（イメージ）" width="1440" height="1080" loading="lazy">
+        <div class="scene-body">
+          <p class="cap-en">Weekend</p>
+          <h4>帰省や、家族での滞在にも。</h4>
+          <p>ダブルベッドは2名でご利用いただけます。出張以外の週末の滞在にもどうぞ。</p>
+        </div>
+      </div>
+      <div class="scene">
+        <img src="images/scene-morning.webp" srcset="images/scene-morning-900.webp 900w, images/scene-morning.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="朝の光が差し込む客室と荷造り中のスーツケース（イメージ）" width="1440" height="1080" loading="lazy">
+        <div class="scene-body">
+          <p class="cap-en">Morning</p>
+          <h4>朝は、10時までゆっくりと。</h4>
+          <p>チェックアウトは10時。朝の支度に余裕を持って、次の現場へ向かえます。</p>
+        </div>
+      </div>
+    </div>
+    <p class="scene-note reveal">※ 掲載の写真は滞在イメージです。設備・内装は実際のものと異なる場合があります。</p>
   </div>
 </section>
 
