@@ -46,3 +46,7 @@
 ## ページ一覧
 - ホーム: https://www.smartworkhotel.jp/
 - 宿泊約款・利用規則: https://www.smartworkhotel.jp/terms.html
+
+## 規約・法的表記
+- 宿泊約款・利用規則: https://www.smartworkhotel.jp/terms.html
+- 特定商取引法に基づく表記: https://www.smartworkhotel.jp/terms.html#tokusho

@@ -15,6 +15,15 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=20260629">
 <meta name="format-detection" content="telephone=no">
 <meta name="color-scheme" content="light">
+<!-- 日本語書体は使用文字だけに絞って自前配信（tools/build-fonts.py で生成）。
+     Google Fonts の分割配信だと93ファイル・835KB で転送量の38%を占めていた。
+     日本語書体は preload しない（ヒーロー画像と帯域を奪い合う）。 -->
+<style>
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-400.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-500.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-700.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:900;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-900.woff2') format('woff2')}
+</style>
 <style>
   :root{color-scheme:light}
   @media(prefers-color-scheme:dark){
@@ -134,7 +143,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#013451;--navy-deep:#01202f;--ink:#101417;
@@ -478,6 +487,7 @@
   <a href="#faq">よくある質問</a>
   <a href="#corporate">法人予約・お問い合わせ</a>
   <a href="terms.html">宿泊約款・利用規則</a>
+      <a href="terms.html#tokusho">特定商取引法に基づく表記</a>
   <a class="dw-tel" href="tel:05017920601"><small>お電話でのお問い合わせ（日中のみ）</small><b>050-1792-0601</b></a>
   <a class="dw-cta en" href="https://booking.smartworkhotel.jp/" data-tripla-booking-widget="search">空室を確認・予約する</a>
 </div>
@@ -872,6 +882,7 @@
       <a href="#faq">よくある質問</a>
       <a href="#corporate">法人予約・お問い合わせ</a>
       <a href="terms.html">宿泊約款・利用規則</a>
+      <a href="terms.html#tokusho">特定商取引法に基づく表記</a>
     </div>
   </div>
   <div class="foot-copy en">© 2026 Smart Work Hotel Hitachi-Takahagi. All rights reserved.</div>

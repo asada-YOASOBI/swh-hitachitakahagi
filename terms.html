@@ -16,7 +16,16 @@
 <meta property="og:url" content="https://www.smartworkhotel.jp/terms.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- 日本語書体は使用文字だけに絞って自前配信（tools/build-fonts.py で生成）。
+     Google Fonts の分割配信だと93ファイル・835KB で転送量の38%を占めていた。
+     日本語書体は preload しない（ヒーロー画像と帯域を奪い合う）。 -->
+<style>
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-400.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-500.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-700.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:900;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-900.woff2') format('woff2')}
+</style>
 <style>
   :root{
     --navy:#013451; --navy-deep:#01202f; --ink:#101417;
@@ -182,6 +191,30 @@
         〒318-0002 茨城県高萩市高戸387-12<br>
         TEL <a href="tel:05017920601">050-1792-0601</a>（日中のみ・夜間の対応はいたしかねます） ／ <a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a>
       </div>
+    </section>
+
+    <section id="tokusho">
+      <h2><span class="no en">PART 4</span>特定商取引法に基づく表記</h2>
+      <p>各予約サイトでの事前クレジットカード決済（通信販売）に関する表記です。</p>
+      <table>
+        <tbody>
+        <tr><th>販売業者</th><td>株式会社Now Resort（スマートワークホテル日立高萩）</td></tr>
+        <!-- 確認後に追記する行：
+        <tr><th>運営責任者</th><td>（氏名）</td></tr>
+        <tr><th>本社所在地</th><td>（登記上の住所）</td></tr>
+        <tr><th>旅館業許可</th><td>（許可番号・許可年月日）</td></tr>
+        -->
+        <tr><th>施設所在地</th><td>〒318-0002 茨城県高萩市高戸387-12</td></tr>
+        <tr><th>電話番号</th><td><a href="tel:05017920601">050-1792-0601</a>（日中のみ・夜間の対応はいたしかねます）</td></tr>
+        <tr><th>メールアドレス</th><td><a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a></td></tr>
+        <tr><th>販売価格</th><td>各予約サイトのプラン画面に表示する宿泊料金（消費税込み）</td></tr>
+        <tr><th>宿泊料金以外に必要な費用</th><td>ありません。駐車場は無料です。予約サイトの閲覧に要する通信費はお客さまのご負担となります</td></tr>
+        <tr><th>お支払い方法</th><td>各予約サイトでのクレジットカード決済のみ。現金・電子マネー・QRコード決済を含め、現地でのお支払いはお受けしていません</td></tr>
+        <tr><th>お支払い時期</th><td>ご予約確定時（各予約サイトの規定に従います）</td></tr>
+        <tr><th>サービスの提供時期</th><td>ご予約いただいた宿泊日のチェックイン時刻（16:00）から</td></tr>
+        <tr><th>キャンセル・返金</th><td>第6条「別表 違約金（キャンセル料）」のとおりです。ご予約のプランに個別のキャンセルポリシーが表示されている場合はそちらが優先されます。返金は、お支払いに使われた予約サイトを通じて同じクレジットカードへ行います</td></tr>
+        </tbody>
+      </table>
     </section>
 
   </div>
