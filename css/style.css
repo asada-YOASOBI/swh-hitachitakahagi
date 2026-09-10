@@ -344,8 +344,9 @@ body.in-fv .cta-fixed,body.at-footer .cta-fixed,body.menu-open .cta-fixed{transf
 /* ---------- 出現 ---------- */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .6s ease-out,transform .6s var(--ease-quart)}
 .reveal.is-inview{opacity:1;transform:none}
-.reveal--fig{transform:none;clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease-expo),opacity .6s ease-out}
-.reveal--fig.is-inview{clip-path:inset(0 0 0 0)}
+.reveal--fig{transform:none;transition:opacity .6s ease-out}
+.reveal--fig img,.reveal--fig iframe{clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease-expo)}
+.reveal--fig.is-inview img,.reveal--fig.is-inview iframe{clip-path:inset(0 0 0 0)}
 
 /* ---------- レスポンシブ ---------- */
 @media (max-width:1100px){
@@ -421,4 +422,5 @@ body.in-fv .cta-fixed,body.at-footer .cta-fixed,body.menu-open .cta-fixed{transf
 /* 静止撮影用（tools/shots.mjs が html に付ける）。OSの「動きを減らす」設定では止めない＝りり指示 */
 html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 html.no-motion .reveal,html.no-motion .reveal--fig{opacity:1;transform:none;clip-path:none}
+html.no-motion .reveal--fig img,html.no-motion .reveal--fig iframe{clip-path:none}
 html.no-motion .marquee__inner{animation:none}
