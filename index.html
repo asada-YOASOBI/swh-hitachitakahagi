@@ -15,33 +15,20 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=20260629">
 <meta name="format-detection" content="telephone=no">
 <meta name="color-scheme" content="light">
-<!-- 日本語書体は使用文字だけに絞って自前配信（tools/build-fonts.py で生成）。
-     Google Fonts の分割配信だと93ファイル・835KB で転送量の38%を占めていた。
-     日本語書体は preload しない（ヒーロー画像と帯域を奪い合う）。 -->
+<meta name="theme-color" content="#1d3d4c">
+
+<!-- 書体は使用文字だけに絞って自前配信（tools/build-fonts.py で生成）。
+     日本語書体は preload しない（ファーストビューの写真と帯域を奪い合う）。 -->
 <style>
 @font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-400.woff2') format('woff2')}
 @font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-500.woff2') format('woff2')}
 @font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-700.woff2') format('woff2')}
-@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:900;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-900.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/barlow-400.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/barlow-500.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/barlow-600.woff2') format('woff2')}
 </style>
-<style>
-  :root{color-scheme:light}
-  @media(prefers-color-scheme:dark){
-    :root{
-      color-scheme:light;
-      background-color:#ffffff !important;
-      color:#101417 !important;
-    }
-    html,body{
-      background:#ffffff !important;
-      color:#101417 !important;
-      -webkit-text-size-adjust:100%;
-    }
-    *{
-      -webkit-tap-highlight-color:rgba(0,0,0,0);
-    }
-  }
-</style>
+<link rel="preload" as="image" href="images/exterior-night-1600.webp" imagesrcset="images/exterior-night-1200.webp 1200w, images/exterior-night-1600.webp 1600w, images/exterior-night.webp 2400w" imagesizes="100vw">
+<link rel="stylesheet" href="css/style.css?v=20260910">
 
 <!-- ===== OGP（SNS・LINEシェア最適化） ===== -->
 <meta property="og:site_name" content="スマートワークホテル日立高萩">
@@ -143,698 +130,337 @@
 }
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#013451;--navy-deep:#01202f;--ink:#101417;
-    --paper:#ffffff;--paper-cool:#eef2f4;--line:#d3dbe0;--line-strong:#101417;
-    --ink-soft:#48565e;--muted:#93a0a8;--accent:#0a6fa8;--sky:#6fd0ff;
-    --max:1200px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;forced-color-adjust:none}
-  html{scroll-behavior:smooth;background:#ffffff}
-  body{font-family:"Zen Kaku Gothic New",sans-serif;color:#101417;background:#ffffff;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  .en{font-family:"Outfit",sans-serif}
-  img{display:block;max-width:100%}
-  a{color:inherit}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-  .brand-mark{height:40px;width:auto;flex-shrink:0;display:block}
-  .brand-lockup{display:flex;flex-direction:column;gap:.22rem;line-height:1}
-  .brand-word{height:18px;width:auto;display:block}
-  .brand-loc{font-size:.64rem;letter-spacing:.12em;color:var(--ink-soft);font-weight:700;display:flex;align-items:center}
-  .brand-loc i{font-family:"Outfit",sans-serif;font-style:normal;color:var(--muted);letter-spacing:.2em;margin-left:.45em;font-size:.92em;font-weight:500}
-
-  /* ヘッダー */
-  header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.75rem clamp(1rem,4vw,2.4rem);background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-strong)}
-  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
-  .nav-links{display:flex;gap:1.8rem;align-items:center}
-  nav{display:flex;gap:1.55rem}
-  nav a{color:var(--ink);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.03em;transition:.15s;position:relative}
-  nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--navy);transition:.18s}
-  nav a:hover::after{width:100%}
-  .nav-cta{background:var(--navy);color:#fff !important;padding:.62rem 1.5rem;font-family:"Outfit",sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-decoration:none;transition:.15s}
-  .nav-cta:hover{background:var(--ink)}
-
-  .nav-tel{display:flex;flex-direction:column;align-items:flex-end;gap:.1rem;text-decoration:none;line-height:1.15}
-  .nav-tel-lab{font-size:.6rem;letter-spacing:.06em;color:var(--ink-soft)}
-  .nav-tel-num{font-size:1.02rem;font-weight:700;color:var(--navy);letter-spacing:.01em}
-
-  @media(max-width:880px){.nav-links nav{display:none}}
-
-  /* ハンバーガー（880px以下でナビが消えるため） */
-  .nav-burger{display:none;background:none;border:0;padding:.4rem;cursor:pointer;flex-direction:column;gap:5px;width:40px}
-  .nav-burger span{display:block;height:2px;width:24px;background:var(--ink);transition:.2s}
-  body.drawer-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  body.drawer-open .nav-burger span:nth-child(2){opacity:0}
-  body.drawer-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .drawer{position:fixed;inset:0;z-index:150;background:#fff;display:flex;flex-direction:column;justify-content:center;gap:.2rem;padding:5rem 2rem 6rem;transform:translateY(-100%);transition:transform .28s cubic-bezier(.215,.61,.355,1);visibility:hidden}
-  body.drawer-open .drawer{transform:translateY(0);visibility:visible}
-  .drawer a{text-decoration:none;color:var(--ink);font-size:1.15rem;font-weight:700;letter-spacing:.04em;padding:.85rem 0;border-bottom:1px solid var(--line)}
-  .drawer .dw-tel{margin-top:1.6rem;border:0;display:flex;flex-direction:column;gap:.2rem}
-  .drawer .dw-tel small{font-size:.72rem;font-weight:500;color:var(--ink-soft);letter-spacing:.06em}
-  .drawer .dw-tel b{font-family:"Outfit",sans-serif;font-size:1.5rem;letter-spacing:.02em;color:var(--navy)}
-  .drawer .dw-cta{margin-top:1rem;background:var(--navy);color:#fff;text-align:center;border:0;padding:1rem;font-family:"Outfit",sans-serif;letter-spacing:.08em}
-  @media(max-width:880px){
-    .nav-burger{display:flex}
-    .nav-tel{display:none}
-    /* 予約はヘッダーに残す。768px以下は下部固定バーが受け持つので、そこで初めて隠す */
-    .nav-links .nav-cta{padding:.5rem .9rem;font-size:.7rem;letter-spacing:.04em}
-    .nav-links{gap:.6rem}
-  }
-  @media(max-width:768px){
-    .nav-links .nav-cta{display:none}
-  }
-  @media(min-width:881px){ .drawer{display:none} }
-
-
-  /* スマホ下部固定バー */
-  .sp-fixed-bar{display:none}
-  @media(max-width:768px){
-    .sp-fixed-bar{display:grid;grid-template-columns:1fr 1fr 1.9fr;position:fixed;bottom:0;left:0;right:0;z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.18)}
-    .sp-fixed-bar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;padding:.7rem;text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.03em}
-    .sp-fixed-bar .sp-tel,.sp-fixed-bar .sp-access{background:#fff;color:var(--navy);border-top:1px solid var(--line);border-right:1px solid var(--line)}
-    .sp-fixed-bar .sp-reserve{background:var(--navy);color:#fff;border-top:2px solid var(--navy-deep)}
-    .sp-fixed-bar .sp-reserve .best{font-family:"Outfit",sans-serif;font-size:.6rem;font-weight:600;color:var(--sky);letter-spacing:.05em}
-    .sp-fixed-bar svg{width:20px;height:20px}
-    body{padding-bottom:64px}
-  }
-
-  /* ヒーロー */
-  .hero{min-height:100svh;display:grid;grid-template-columns:1.04fr .96fr;align-items:stretch;border-bottom:1px solid var(--line-strong)}
-  .hero-text{padding:clamp(5.5rem,12vh,9rem) clamp(1.4rem,4.5vw,4.2rem) 3rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line-strong)}
-  @media(max-width:880px){.hero-text{border-right:none;padding-top:5.5rem}}
-  .badge{display:inline-flex;align-items:center;gap:.55rem;width:fit-content;background:var(--navy);color:#fff;padding:.42rem 1.05rem;font-family:"Outfit",sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.18em;margin-bottom:1.8rem;clip-path:polygon(0 0,100% 0,100% 100%,8px 100%);animation:slideIn .5s .05s both}
-  .badge .dot{width:5px;height:5px;background:var(--sky);animation:blink 1.8s infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-  .hero .kicker{font-family:"Outfit",sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.26em;color:var(--accent);text-transform:uppercase;margin-bottom:1.1rem;animation:slideIn .5s .1s both}
-  .hero h1{font-weight:900;font-size:clamp(1.75rem,4.6vw,3.45rem);line-height:1.28;letter-spacing:-.015em;margin-bottom:1.4rem;color:var(--navy);text-wrap:pretty;animation:slideIn .5s .15s both}
-  .hero h1 .accent-word{font-style:normal;position:relative;display:inline-block}
-  .hero h1 .accent-word::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;height:.18em;background:var(--sky);z-index:-1}
-  .hero .lead{font-size:.98rem;color:var(--ink-soft);max-width:32em;margin-bottom:2rem;text-wrap:pretty;animation:slideIn .5s .25s both}
-  .best-rate{display:inline-flex;align-items:center;gap:.55rem;margin-bottom:1.2rem;font-size:.84rem;color:var(--navy);font-weight:700;animation:slideIn .5s .3s both}
-  .best-rate svg{flex-shrink:0}
-  .hero-actions{display:flex;gap:0;animation:slideIn .5s .35s both;border:1px solid var(--line-strong);width:fit-content}
-  .btn-primary{background:var(--navy);color:#fff;text-decoration:none;padding:1.02rem 2.2rem;font-family:"Outfit",sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.04em;display:inline-flex;align-items:center;gap:.6rem;transition:.15s;border:none;cursor:pointer}
-  .btn-primary:hover{background:var(--ink)}
-  .btn-primary .arr{transition:.2s}
-  .btn-primary:hover .arr{transform:translateX(4px)}
-  .btn-ghost{background:#fff;color:var(--ink);text-decoration:none;padding:1.02rem 1.9rem;font-family:"Outfit",sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.04em;transition:.15s;border-left:1px solid var(--line-strong);display:inline-flex;align-items:center}
-  .btn-ghost:hover{background:var(--ink);color:#fff}
-  .cashless-note{margin-top:1.9rem;font-size:.8rem;color:var(--ink-soft);border-left:3px solid var(--accent);padding:.55rem 0 .55rem 1rem;max-width:36em;text-wrap:pretty;animation:slideIn .5s .45s both}
-
-  .hero-visual{position:relative;background:var(--navy-deep);overflow:hidden}
-  .hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
-  .hero-visual .photo-cap{position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:.7rem;background:rgba(1,32,47,.82);backdrop-filter:blur(6px);color:rgba(255,255,255,.85);font-family:"Outfit",sans-serif;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;padding:.55rem 1.2rem}
-  .hero-visual .photo-cap::before{content:"";width:22px;height:1px;background:var(--sky)}
-  @media(max-width:880px){.hero{grid-template-columns:1fr;min-height:auto}.hero-visual{min-height:46vh}.hero-visual img{min-height:46vh}}
-
-  /* 数値ストリップ */
-  .stats{background:var(--navy-deep);color:#fff;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line-strong)}
-  .stats .item{padding:1.9rem 1rem 1.7rem;text-align:center;border-right:1px solid rgba(255,255,255,.14)}
-  .stats .item:last-child{border-right:none}
-  .stats .num{font-family:"Outfit",sans-serif;font-weight:800;font-size:2rem;line-height:1;letter-spacing:-.02em}
-  .stats .num .u{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.65);margin-left:.15rem}
-  .stats .lbl{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:.6rem;letter-spacing:.1em}
-  @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.stats .item{padding:1.4rem .8rem 1.2rem}.stats .item:nth-child(1),.stats .item:nth-child(3){border-right:1px solid rgba(255,255,255,.14)}.stats .item:nth-child(2){border-right:none}.stats .item:nth-child(1),.stats .item:nth-child(2){border-bottom:1px solid rgba(255,255,255,.14)}}
-
-  /* セクション共通 */
-  section{padding:clamp(3.8rem,9vh,6rem) clamp(1.4rem,5vw,4rem)}
-  .wrap{max-width:var(--max);margin:0 auto}
-  .sec-head{display:flex;align-items:baseline;gap:1.3rem;margin-bottom:2.6rem;border-bottom:1px solid var(--line-strong);padding-bottom:1.2rem}
-  .sec-head .idx{font-family:"Outfit",sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);letter-spacing:.05em;flex-shrink:0}
-  .eyebrow{font-family:"Outfit",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.24em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
-  .sec-title{font-weight:900;font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.3;color:var(--navy);letter-spacing:-.02em;text-wrap:pretty}
-  .sec-sub{color:var(--ink-soft);max-width:42em;font-size:.95rem;margin-top:.65rem;text-wrap:pretty}
-
-  /* スマートワーク設備 */
-  .smart{background:var(--paper-cool);border-bottom:1px solid var(--line-strong)}
-  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-strong);border-left:1px solid var(--line-strong)}
-  @media(max-width:900px){.feat-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.feat-grid{grid-template-columns:1fr}}
-  .feat{background:var(--paper);padding:2.1rem 1.6rem;border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);transition:.18s;position:relative}
-  .feat:hover{background:var(--navy)}
-  .feat:hover h3,.feat:hover p{color:#fff}
-  .feat:hover .ic{color:var(--sky)}
-  .feat .fn{position:absolute;top:1.2rem;right:1.3rem;font-family:"Outfit",sans-serif;font-size:.72rem;font-weight:700;color:var(--line);transition:.18s}
-  .feat:hover .fn{color:rgba(255,255,255,.4)}
-  .feat .ic{width:38px;height:38px;margin-bottom:1.2rem;color:var(--navy);transition:.18s}
-  .feat h3{font-weight:700;font-size:1.02rem;margin-bottom:.5rem;color:var(--navy);transition:.18s;letter-spacing:-.01em}
-  .feat p{font-size:.85rem;color:var(--ink-soft);transition:.18s;text-wrap:pretty}
-
-  /* 客室 */
-  .room-wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:0;align-items:stretch;border:1px solid var(--line-strong)}
-  @media(max-width:1020px){.room-wrap{grid-template-columns:1fr}}
-  .room-gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--line-strong);border-right:1px solid var(--line-strong);min-height:0}
-  .room-gallery .cell{position:relative;overflow:hidden;min-height:0;min-width:0}
-  .room-gallery .cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  @media(max-width:1020px){.room-gallery{border-right:none;border-bottom:1px solid var(--line-strong);grid-template-rows:repeat(2,minmax(150px,26vw))}}
-  .room-detail{padding:2.4rem clamp(1.5rem,3vw,2.6rem);display:flex;flex-direction:column;justify-content:center}
-  .room-detail h3{color:var(--navy);font-size:1.3rem;font-weight:900;letter-spacing:-.02em}
-  .room-detail .price-line{color:var(--ink-soft);font-size:.9rem;margin-top:.5rem}
-  .room-spec{list-style:none;margin-top:1.5rem;border-top:1px solid var(--line-strong)}
-  .room-spec li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.68rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
-  .room-spec li span:first-child{color:var(--muted);font-size:.84rem;letter-spacing:.05em;white-space:nowrap}
-  .room-spec li span:last-child{font-weight:700;color:var(--navy);font-family:"Outfit",sans-serif;white-space:nowrap}
-  .room-eq{display:flex;flex-wrap:wrap;gap:0;margin-top:1.5rem;border-top:1px solid var(--line);border-left:1px solid var(--line)}
-  .room-eq span{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:.42rem .85rem;font-size:.78rem;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap}
-  .clean-note{font-size:.8rem;color:var(--ink-soft);margin-top:1.4rem;line-height:1.7;border-left:3px solid var(--line-strong);padding-left:.9rem;text-wrap:pretty}
-
-  /* 設備・貸出 */
-  .fac-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-strong);border-left:1px solid var(--line-strong)}
-  @media(max-width:760px){.fac-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:440px){.fac-grid{grid-template-columns:1fr}}
-  .fac{background:var(--paper);padding:1.6rem 1.4rem;border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
-  .fac b{display:block;color:var(--navy);font-size:.96rem;margin-bottom:.45rem;letter-spacing:-.01em}
-  .fac p{color:var(--ink-soft);font-size:.82rem;text-wrap:pretty}
-  .fac.is-preparing{background:var(--paper-cool)}
-  .fac.is-preparing b{display:flex;align-items:center;gap:.45rem;color:var(--ink-soft)}
-  .fac.is-preparing .soon{display:inline-block;margin-top:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--accent);border:1px solid var(--accent);padding:.18rem .6rem}
-  .rental-box{margin-top:1.7rem;border:1px solid var(--line-strong)}
-  .rental-box .lbl{font-family:"Outfit",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;color:#fff;background:var(--navy);padding:.62rem 1.2rem}
-  .rental-tags{display:flex;flex-wrap:wrap;gap:0;border-left:1px solid var(--line)}
-  .rental-tags span{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:.55rem 1rem;font-size:.82rem;color:var(--ink-soft);white-space:nowrap}
-
-  /* アメニティ */
-  .amenity-box{margin-top:1.7rem;border:1px solid var(--line-strong)}
-  .amenity-photo{overflow:hidden;background:#f4f1ec}
-  .amenity-photo img{width:100%;display:block;height:auto}
-  .amenity-text{padding:1.9rem clamp(1.4rem,3vw,2.2rem);border-top:1px solid var(--line-strong)}
-  .amenity-text h3{font-weight:900;font-size:1.2rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.7rem}
-  .amenity-text>p{color:var(--ink-soft);font-size:.88rem;line-height:1.85;margin-bottom:1.1rem;max-width:52em;text-wrap:pretty}
-  .amenity-tags{display:flex;flex-wrap:wrap;gap:.45rem}
-  .amenity-tags span{border:1px solid var(--line);padding:.35rem .75rem;font-size:.76rem;color:var(--ink-soft);background:var(--paper-cool);white-space:nowrap}
-
-  /* フロー */
-  .flow{background:var(--paper-cool);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
-  .flow-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong);border-left:1px solid var(--line-strong)}
-  @media(max-width:760px){.flow-grid{grid-template-columns:1fr}}
-  .flow-step{background:var(--paper);padding:2.1rem 1.7rem;border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
-  .flow-step .step-no{font-family:"Outfit",sans-serif;font-weight:800;font-size:2.6rem;color:var(--navy);line-height:1;letter-spacing:-.03em;margin-bottom:.85rem;display:block}
-  .flow-step .step-no::after{content:"";display:block;width:36px;height:3px;background:var(--navy);margin-top:.65rem}
-  .flow-step h4{font-weight:700;font-size:1.02rem;color:var(--navy);margin-bottom:.5rem;letter-spacing:-.01em}
-  .flow-step p{font-size:.85rem;color:var(--ink-soft);text-wrap:pretty}
-  .flow-photo{margin-top:1.7rem;display:grid;grid-template-columns:1.3fr 1fr;border:1px solid var(--line-strong);align-items:stretch;background:var(--paper)}
-  @media(max-width:760px){.flow-photo{grid-template-columns:1fr}}
-  .flow-photo img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
-  .flow-photo-cap{padding:2rem 1.8rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line-strong)}
-  @media(max-width:760px){.flow-photo-cap{border-left:none;border-top:1px solid var(--line-strong)}}
-  .flow-photo-cap .cap-en{font-family:"Outfit",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
-  .flow-photo-cap h4{font-weight:900;font-size:1.15rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.6rem}
-  .flow-photo-cap p:not(.cap-en){color:var(--ink-soft);font-size:.88rem;line-height:1.85;text-wrap:pretty}
-  .scene-lead{margin-top:1.7rem;display:grid;grid-template-columns:1.3fr 1fr;border:1px solid var(--line-strong);align-items:stretch;background:var(--paper)}
-  @media(max-width:760px){.scene-lead{grid-template-columns:1fr}}
-  .scene-lead img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
-  .scene-lead-cap{padding:2rem 1.8rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line-strong)}
-  @media(max-width:760px){.scene-lead-cap{border-left:none;border-top:1px solid var(--line-strong)}}
-  .scene-lead-cap .cap-en{font-family:"Outfit",sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem}
-  .scene-lead-cap h4{font-weight:900;font-size:1.15rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.6rem}
-  .scene-lead-cap p:not(.cap-en){color:var(--ink-soft);font-size:.88rem;line-height:1.85;text-wrap:pretty}
-  .scene-grid{margin-top:1.6rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-strong);border:1px solid var(--line-strong)}
-  @media(max-width:900px){.scene-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.scene-grid{grid-template-columns:1fr}}
-  .scene{background:var(--paper);display:flex;flex-direction:column}
-  .scene img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
-  .scene-body{padding:1.25rem 1.15rem 1.45rem}
-  .scene-body .cap-en{font-family:"Outfit",sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem}
-  .scene-body h4{font-weight:900;font-size:1rem;color:var(--navy);letter-spacing:-.02em;margin-bottom:.45rem}
-  .scene-body p{color:var(--ink-soft);font-size:.83rem;line-height:1.8;text-wrap:pretty}
-  .scene-note{margin-top:1.1rem;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
-
-  /* 予約CTA */
-  .book{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line-strong)}
-  .book .grid-deco{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
-  .book .wrap{position:relative}
-  .book .eyebrow{color:var(--sky)}
-  .book h2{font-weight:900;font-size:clamp(1.7rem,3.6vw,2.6rem);margin-bottom:1.1rem;letter-spacing:-.02em;text-wrap:pretty}
-  .direct-merits{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);max-width:980px;margin:1.8rem auto 2.2rem}
-  @media(max-width:900px){.direct-merits{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.direct-merits{grid-template-columns:1fr}}
-  .dm-item .off{font-family:"Outfit",sans-serif;font-weight:800;color:var(--sky)}
-  .dm-item{background:rgba(255,255,255,.06);padding:1.2rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
-  .dm-item svg{color:var(--sky);margin-bottom:.25rem}
-  .dm-item b{font-size:.9rem;color:#fff;font-weight:700;letter-spacing:-.01em}
-  .dm-item span{font-size:.76rem;color:rgba(255,255,255,.65);line-height:1.55}
-  .book .btn-primary{background:#fff;color:var(--navy);border:1px solid #fff}
-  .book .btn-primary:hover{background:var(--sky);border-color:var(--sky);color:var(--navy)}
-
-  /* アクセス */
-  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line-strong)}
-  @media(max-width:820px){.access-grid{grid-template-columns:1fr}}
-  .access-info{padding:2.3rem clamp(1.5rem,3vw,2.6rem);border-right:1px solid var(--line-strong)}
-  @media(max-width:820px){.access-info{border-right:none;border-bottom:1px solid var(--line-strong)}}
-  .info-row{display:flex;padding:.78rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
-  .info-row dt{width:6.5rem;flex-shrink:0;color:var(--muted);font-size:.8rem;letter-spacing:.04em}
-  .info-row dd{color:var(--ink)}
-  .route{display:grid;gap:0;margin-top:1.5rem;border-top:1px solid var(--line)}
-  .route .r{display:flex;gap:0;align-items:stretch;font-size:.88rem;border-bottom:1px solid var(--line)}
-  .route .r .tag{flex-shrink:0;width:3.4rem;display:flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;font-size:.72rem;font-family:"Outfit",sans-serif;font-weight:600;letter-spacing:.06em}
-  .route .r .txt{padding:.72rem .95rem}
-
-  /* 立地・周辺環境 */
-  .location{background:var(--paper-cool);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
-  .loc-cat{margin-top:2.1rem}
-  .loc-cat:first-of-type{margin-top:0}
-  .loc-cat-ttl{display:flex;align-items:center;gap:.6rem;font-family:"Outfit",sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
-  .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong);border-left:1px solid var(--line-strong)}
-  @media(max-width:760px){.loc-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:440px){.loc-grid{grid-template-columns:1fr}}
-  .loc-item{background:#fff;padding:1.35rem 1.4rem;border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);display:flex;flex-direction:column;gap:.3rem}
-  .loc-item .name{font-weight:700;font-size:.95rem;color:var(--navy);letter-spacing:-.01em}
-  .loc-item .dist{font-family:"Outfit",sans-serif;font-size:1.35rem;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em}
-  .loc-item .dist .u{font-size:.78rem;font-weight:500;color:var(--ink-soft);margin-left:.2rem}
-  .loc-item .note{font-size:.78rem;color:var(--muted);text-wrap:pretty}
-
-  /* FAQ */
-  .faq{border-top:1px solid var(--line-strong)}
-  .faq details{border-bottom:1px solid var(--line)}
-  .faq summary{padding:1.15rem .2rem;cursor:pointer;font-weight:700;font-size:.94rem;color:var(--navy);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;letter-spacing:-.01em}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";font-family:"Outfit",sans-serif;font-weight:400;font-size:1.5rem;color:var(--accent);transition:.18s;flex-shrink:0;line-height:1}
-  .faq details[open] summary::after{transform:rotate(45deg)}
-  .faq .ans{padding:0 .2rem 1.15rem;font-size:.88rem;color:var(--ink-soft);max-width:60em;text-wrap:pretty}
-
-  /* 法人 */
-  .corp{background:var(--ink);color:#fff;text-align:center;border-bottom:1px solid var(--line-strong)}
-  .corp .eyebrow{color:var(--sky)}
-  .corp h2{font-weight:900;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.1rem;letter-spacing:-.02em;text-wrap:pretty}
-  .corp p{color:rgba(255,255,255,.75);max-width:36em;margin:0 auto 1.8rem;font-size:.95rem;text-wrap:pretty}
-  .corp .btn-primary{background:#fff;color:var(--ink);margin:0 auto;border:1px solid #fff}
-  .corp .btn-primary:hover{background:var(--sky)}
-
-  /* フッター */
-  footer{background:var(--paper-cool);color:var(--ink-soft);padding:3rem clamp(1.4rem,5vw,4rem) 1.8rem;border-top:1px solid var(--line-strong)}
-  .foot-wrap{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:2.5rem;align-items:start}
-  @media(max-width:680px){.foot-wrap{grid-template-columns:1fr}}
-  .foot-brand{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
-  .foot-brand .brand-mark{height:46px}
-  .foot-brand .brand-word{height:19px}
-  .foot-brand .brand-loc{color:var(--ink-soft)}
-  .foot-brand .brand-loc i{color:var(--muted)}
-  .foot-info{font-size:.84rem;line-height:1.95;color:var(--ink-soft)}
-  .foot-info a{color:var(--accent);text-decoration:none}
-  .foot-links{display:flex;flex-direction:column;gap:.55rem;font-size:.84rem}
-  .foot-links a{color:var(--ink-soft);text-decoration:none;transition:.15s;width:fit-content}
-  .foot-links a:hover{color:var(--navy)}
-  .foot-copy{max-width:var(--max);margin:1.9rem auto 0;padding-top:1.4rem;border-top:1px solid var(--line);font-family:"Outfit",sans-serif;font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
-
-  @keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
-  .reveal{opacity:0;transform:translateY(16px);transition:.55s cubic-bezier(.16,.84,.32,1)}
-  .reveal.in{opacity:1;transform:translateY(0)}
-  @media(prefers-reduced-motion:reduce){
-    .reveal{opacity:1;transform:none;transition:none}
-    .badge,.hero .kicker,.hero h1,.hero .lead,.best-rate,.hero-actions,.cashless-note{animation:none}
-  }
-</style>
 <!-- tripla Book / Bot -->
 <script async src="https://tripla.jp/sdk/javascript/tripla.min.js" data-triplabot-code="019e5d43-ca8e-742a-ab76-6987cc0cc2af" data-triplabot-draggable="true"></script>
 </head>
 <body>
 
-<header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 18 10"><path d="M0 5h17M12 .6 17 5l-5 4.4"/></symbol>
+</svg>
+
+<header class="header">
   <a href="#top" class="brand" aria-label="スマートワークホテル日立高萩 ホーム">
-    <img class="brand-mark" src="images/brand-mark.png" alt="" width="264" height="420">
-    <span class="brand-lockup">
-      <img class="brand-word" src="images/brand-wordmark.png" alt="スマートワークホテル" width="1372" height="170">
-      <span class="brand-loc">日立高萩<i>HITACHI-TAKAHAGI</i></span>
+    <img class="brand__mark" src="images/brand-mark.png" alt="" width="264" height="420">
+    <span class="brand__lockup">
+      <img class="brand__word" src="images/brand-wordmark.png" alt="スマートワークホテル" width="1372" height="170">
+      <span class="brand__loc">日立高萩</span>
     </span>
   </a>
-  <div class="nav-links">
-    <nav>
-      <a href="#smart">設備</a>
-      <a href="#rooms">客室</a>
-      <a href="#facilities">館内設備</a>
-      <a href="#access">アクセス</a>
-      <a href="#faq">FAQ</a>
-      <a href="#corporate">法人予約</a>
-    </nav>
-    <a href="tel:05017920601" class="nav-tel">
-      <span class="nav-tel-lab">お電話でのお問い合わせ</span>
-      <span class="nav-tel-num en">050-1792-0601</span>
-    </a>
-    <a href="https://booking.smartworkhotel.jp/" class="nav-cta en" data-tripla-booking-widget="search">RESERVE</a>
-    <button type="button" class="nav-burger" id="navBurger" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
-      <span></span><span></span><span></span>
-    </button>
+  <nav class="nav" aria-label="メインメニュー">
+    <a href="#rooms">客室</a>
+    <a href="#smart">ご利用の流れ</a>
+    <a href="#facilities">館内設備</a>
+    <a href="#access">アクセス</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#corporate">法人予約</a>
+  </nav>
+  <div class="pills">
+    <a href="https://booking.smartworkhotel.jp/" class="pill pill--book" data-tripla-booking-widget="search">ご予約<span class="en">↗</span></a>
+    <button type="button" class="pill pill--menu" aria-label="メニュー" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
   </div>
 </header>
 
-<div class="drawer" id="drawer">
-  <a href="#smart">設備</a>
-  <a href="#rooms">客室</a>
-  <a href="#facilities">館内設備</a>
-  <a href="#access">アクセス</a>
-  <a href="#faq">よくある質問</a>
-  <a href="#corporate">法人予約・お問い合わせ</a>
-  <a href="terms.html">宿泊約款・利用規則</a>
-      <a href="terms.html#tokusho">特定商取引法に基づく表記</a>
-  <a class="dw-tel" href="tel:05017920601"><small>お電話でのお問い合わせ（日中のみ）</small><b>050-1792-0601</b></a>
-  <a class="dw-cta en" href="https://booking.smartworkhotel.jp/" data-tripla-booking-widget="search">空室を確認・予約する</a>
+<div class="overlay" id="menu">
+  <div class="overlay__in">
+    <nav class="overlay__nav" aria-label="メニュー">
+      <a href="#rooms">客室<small>Rooms</small></a>
+      <a href="#smart">ご利用の流れ<small>Smart Stay</small></a>
+      <a href="#facilities">館内設備<small>Facilities</small></a>
+      <a href="#access">アクセス<small>Access</small></a>
+      <a href="#faq">よくある質問<small>Questions</small></a>
+      <a href="#corporate">法人予約<small>Corporate</small></a>
+      <a href="terms.html">宿泊約款・利用規則<small>Terms</small></a>
+      <a href="terms.html#tokusho">特定商取引法に基づく表記<small>Legal</small></a>
+    </nav>
+    <div class="overlay__sub">
+      <a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a>
+      <a href="https://booking.smartworkhotel.jp/" class="btn btn--light" data-tripla-booking-widget="search">空室を検索する<svg class="arrow"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
 </div>
 
+<main id="top">
 
-<section class="hero" id="top" data-screen-label="ヒーロー">
-  <div class="hero-text">
-    <span class="badge en"><span class="dot"></span>NOW OPEN — 2026.06 GRAND OPENED</span>
-    <p class="kicker">Hitachi-Takahagi Business Stay</p>
-    <h1>仕事に集中するための、<br>高萩の<span class="accent-word">スマートな</span>滞在拠点。</h1>
-    <p class="lead">工業地帯への出張、工事関係者の長期滞在、短期のビジネス利用に。セルフチェックイン、高速Wi-Fi、有線LAN、無料駐車場を備えた、無駄のないビジネスホテルです。</p>
-    <div class="best-rate">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"></path></svg>
-      ベストレート保証 — 無料の会員登録で、いつでも<b class="en" style="color:var(--accent)">5%OFF</b>
+<!-- ファーストビュー（A型 額縁） -->
+<section class="fv" aria-label="スマートワークホテル日立高萩">
+  <div class="fv__frame">
+    <div class="fv__pic">
+      <img src="images/exterior-night.webp" srcset="images/exterior-night-1200.webp 1200w, images/exterior-night-1600.webp 1600w, images/exterior-night.webp 2400w" sizes="100vw" alt="スマートワークホテル日立高萩 外観（夕景）" width="2400" height="1787" fetchpriority="high" decoding="async">
     </div>
-    <div class="hero-actions">
-      <a href="https://booking.smartworkhotel.jp/" class="btn-primary en" data-tripla-booking-widget="search">空室を検索する <span class="arr">→</span></a>
-      <a href="#access" class="btn-ghost en">ACCESS</a>
+    <div class="fv__shade" aria-hidden="true"></div>
+    <div class="fv__body">
+      <p class="fv__eyebrow">Hitachi-Takahagi, Ibaraki</p>
+      <h1 class="fv__catch">今日の現場を終えて、<br>まっすぐ部屋へ。</h1>
+      <p class="fv__lead">セルフチェックインで、フロントに並ばない。全室に高速Wi-Fiと有線LAN、無料駐車場15台。高萩の出張と長期滞在のための、無駄のないビジネスホテルです。</p>
     </div>
-    <p class="cashless-note">当ホテルは事前決済限定です。お支払いはご予約時のクレジットカード決済のみとなり、現金・電子マネー・QRコード決済を含め、現地でのお支払いは一切できません。</p>
-    <p class="cashless-note">チェックインは16:00からです。16時より前のご入館・お部屋のご利用はできません。お車でお越しの場合、空きがございましたら駐車場は先にご利用いただけます。ご到着が遅くなる場合の時間制限はありません。</p>
-  </div>
-  <div class="hero-visual">
-    <img src="images/exterior-night.webp" srcset="images/exterior-night-1200.webp 1200w, images/exterior-night-1600.webp 1600w, images/exterior-night.webp 2400w" sizes="(max-width:880px) 100vw, 48vw" alt="スマートワークホテル日立高萩 外観（夕景）" width="2400" height="1787" fetchpriority="high" decoding="async">
-    <span class="photo-cap en">Takado, Takahagi — Hotel Exterior</span>
+    <div class="fv__facts" aria-hidden="true">
+      <span><b>14</b><small>Rooms</small></span>
+      <span><b>¥6,000–</b><small>Per night</small></span>
+      <span><b>16:00</b><small>Check in</small></span>
+      <span><b>10:00</b><small>Check out</small></span>
+    </div>
+    <div class="fv__scroll" aria-hidden="true">Scroll<i></i></div>
   </div>
 </section>
 
-<div class="stats">
-  <div class="item"><div class="num en">14</div><div class="lbl">客室数（ダブル）</div></div>
-  <div class="item"><div class="num en">15</div><div class="lbl">無料駐車場</div></div>
-  <div class="item"><div class="num en">¥6,000<span class="u">–</span></div><div class="lbl">1泊料金</div></div>
-  <div class="item"><div class="num en">8<span class="u">min</span></div><div class="lbl">高萩ICより車で</div></div>
-</div>
-
-<section id="smart" class="smart" data-screen-label="01 スマートワーク設備">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">01</span>
-      <div>
-        <p class="eyebrow">Smart Work</p>
-        <h2 class="sec-title">出張者に必要なものを、過不足なく。</h2>
-        <p class="sec-sub">滞在中の仕事、移動、洗濯、チェックインまで、現場での負担を減らす設備をそろえています。</p>
+<!-- ご予約の前に（F型 罫線リスト） -->
+<section class="sec sec--tight notice" aria-labelledby="notice-h">
+  <div class="container">
+    <div class="notice__grid">
+      <div class="reveal">
+        <p class="label">Before booking<span class="label__jp">ご予約の前に</span></p>
+        <h2 class="h2" id="notice-h">3つだけ、<br>ご確認ください。</h2>
       </div>
-    </div>
-    <div class="feat-grid reveal">
-      <div class="feat">
-        <span class="fn en">01</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.5a7 7 0 1 1 14 0M2 12.5h20M12 12.5v6M8 18.5h8" stroke-linecap="round"></path></svg>
-        <h3>高速Wi-Fi・有線LAN</h3>
-        <p>全室にアクセスポイントを設置。資料作成やオンライン会議にも使いやすい通信環境です。</p>
-      </div>
-      <div class="feat">
-        <span class="fn en">02</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="1"></rect><path d="M8 21h8M12 17v4" stroke-linecap="round"></path></svg>
-        <h3>スマートテレビ</h3>
-        <p>客室のテレビは仕事にも活用しやすいスマートテレビ。HDMIケーブルの貸出も予定しています。</p>
-      </div>
-      <div class="feat">
-        <span class="fn en">03</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7M5 9.5V20h14V9.5" stroke-linecap="round" stroke-linejoin="round"></path><rect x="9.5" y="13" width="5" height="7"></rect></svg>
-        <h3>無料駐車場 15台</h3>
-        <p>高萩ICから車で約8分。車移動の出張や長期滞在に使いやすい駐車場を備えています。</p>
-      </div>
-      <div class="feat">
-        <span class="fn en">04</span>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path><circle cx="12" cy="16" r="1.3" fill="currentColor" stroke="none"></circle></svg>
-        <h3>セルフチェックイン</h3>
-        <p>タブレットで手続き後、部屋ごとのスマートロック認証番号を発行。遅い到着にも対応しやすい運用です。</p>
-      </div>
+      <ul class="rows reveal">
+        <li class="rows__item">
+          <div>
+            <b>お支払いは、ご予約時のクレジットカード決済のみです。</b>
+            <p>事前決済限定のため、現金・電子マネー・QRコード決済を含め、現地でのお支払いはできません。</p>
+          </div>
+        </li>
+        <li class="rows__item">
+          <div>
+            <b>チェックインは16時から。それより前のご入館はできません。</b>
+            <p>お車の場合、空きがございましたら駐車場は先にご利用いただけます。ご到着が遅くなる場合の時間制限はありません。</p>
+          </div>
+        </li>
+        <li class="rows__item">
+          <div>
+            <b>チェックインコードは、ご予約後にメールでお送りします。</b>
+            <p>予約サイトの予約番号とは別の番号です。届かないときは迷惑メールフォルダをご確認ください。</p>
+          </div>
+          <a href="#faq" class="link-line">詳しく<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section id="rooms" data-screen-label="02 客室">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">02</span>
+<!-- コンセプト（C型 縦長写真＋長文） -->
+<section class="sec sec--wide concept" aria-labelledby="concept-h">
+  <div class="container">
+    <div class="concept__grid">
       <div>
-        <p class="eyebrow">Rooms</p>
-        <h2 class="sec-title">仕事の続きをしやすい、シンプルなダブルルーム。</h2>
-        <p class="sec-sub">1名での出張利用を中心に、帰省や短期滞在での2名利用にも対応します。</p>
-      </div>
-    </div>
-    <div class="room-wrap reveal">
-      <div class="room-gallery">
-        <div class="cell"><img src="images/room-bed.webp" alt="ダブルルーム ベッド・ワークデスク・スマートテレビ" width="1800" height="1200" loading="lazy"></div>
-        <div class="cell"><img src="images/room-overview.webp" alt="ダブルルーム 客室全体（ベッド・デスク・テレビ）" width="1800" height="1350" loading="lazy"></div>
-        <div class="cell"><img src="images/room-desk.webp" alt="スマートテレビ・ワークデスク・電気ケトル・冷蔵庫" width="1800" height="1350" loading="lazy"></div>
-        <div class="cell"><img src="images/bathroom.webp" alt="ユニットバス（バス・洗面・トイレ）" width="1800" height="1200" loading="lazy"></div>
-      </div>
-      <div class="room-detail">
-        <h3>ダブルルーム ／ 全14室</h3>
-        <p class="price-line">料金は1泊6,000円から、宿泊日や空室状況により変動します。</p>
-        <ul class="room-spec">
-          <li><span>定員</span><span>1–2</span></li>
-          <li><span>客室数</span><span>14</span></li>
-          <li><span>料金</span><span>¥6,000–</span></li>
-          <li><span>チェックイン</span><span>16:00〜</span></li>
-          <li><span>チェックアウト</span><span>10:00</span></li>
-        </ul>
-        <div class="room-eq">
-          <span>高速Wi-Fi</span><span>有線LAN</span><span>スマートTV</span><span>冷蔵庫</span><span>ユニットバス</span><span>個別空調</span><span>ドライヤー</span>
-        </div>
-        <p class="clean-note"><b style="color:var(--navy)">連泊時の清掃：</b>チェックアウト時に通常清掃。連泊中は3日に1回の清掃を基本とし、通常日はゴミ回収とタオル交換を中心とした簡易清掃です。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="facilities" data-screen-label="03 館内設備">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">03</span>
-      <div>
-        <p class="eyebrow">Facilities</p>
-        <h2 class="sec-title">長期滞在に必要な設備を揃えています。</h2>
-        <p class="sec-sub">ランドリー、電子レンジ、貸出品、アメニティなど、出張中の身支度と作業を支える設備を用意しています。</p>
-      </div>
-    </div>
-    <div class="fac-grid reveal">
-      <div class="fac is-preparing">
-        <b>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="5"></circle><rect x="4" y="3" width="16" height="18" rx="1"></rect><path d="M7 6h.01M10 6h.01"></path></svg>
-          コインランドリー
-        </b>
-        <p>現在準備中です。開業後に順次対応予定。</p>
-        <span class="soon">COMING SOON</span>
-      </div>
-      <div class="fac"><b>電子レンジ</b><p>食事提供はありません。持ち込み食品の温めにご利用ください。</p></div>
-      <div class="fac"><b>自動販売機</b><p>館内に設置しています。ドリンク類をキャッシュレスでご購入いただけます。</p></div>
-      <div class="fac"><b>屋外喫煙所</b><p>客室内は禁煙です。喫煙は屋外喫煙所をご利用ください。</p></div>
-    </div>
-    <div class="rental-box reveal">
-      <div class="lbl en">RENTAL ／ 貸出品</div>
-      <div class="rental-tags">
-        <span>HDMIケーブル</span><span>LANケーブル</span><span>アイロン</span><span>ズボンプレッサー</span><span>延長コード</span><span>各種充電器</span><span>加湿器</span>
-      </div>
-    </div>
-    <div class="amenity-box reveal">
-      <div class="amenity-photo">
-        <img src="images/amenity.webp" alt="充実のアメニティ：ヘアブラシ・カミソリ・ボディタオル・コットンセット・化粧水・乳液（雪肌精）ほか" width="2400" height="1350" loading="lazy">
-      </div>
-      <div class="amenity-text">
-        <p>ヘアブラシ、カミソリ、ボディタオル、コットンセット、シェービングクリーム、綿棒などをご用意。化粧水・乳液はKOSÉ「雪肌精」をご利用いただけます。出張時の荷物を最小限にして、身軽にお越しください。</p>
-        <div class="amenity-tags">
-          <span>ヘアブラシ</span><span>カミソリ</span><span>ボディタオル</span><span>コットンセット</span><span>シェービングクリーム</span><span>化粧水（雪肌精）</span><span>乳液（雪肌精）</span><span>綿棒</span>
+        <p class="label reveal">Concept<span class="label__jp">高萩で働く人のために</span></p>
+        <h2 class="h2 reveal" id="concept-h">必要なものだけを、<br>きちんと。</h2>
+        <p class="lead reveal">松久保・赤浜・手綱の各工業団地まで、車で5分から10分。常磐自動車道の高萩インターチェンジからは約8分です。現場に近く、移動に時間を取られません。</p>
+        <p class="lead reveal">客室は全14室、すべてダブルルーム。仕事の続きができるデスクと、高速Wi-Fi・有線LANを備えました。</p>
+        <p class="lead reveal">チェックインは館内のタブレットで。フロントに並ぶことも、鍵を受け取ることもありません。発行された暗証番号で、そのままお部屋へ。</p>
+        <p class="lead reveal">食事の提供や豪華な設備はありません。そのぶん、1泊6,000円からの料金と、静かに休める部屋をご用意しています。</p>
+        <div class="link-row reveal">
+          <a href="#rooms" class="link-dash">客室を見る<svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a href="#smart" class="link-dash">ご利用の流れ<svg class="arrow"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
+      <figure class="photo photo--3x4 concept__fig reveal reveal--fig" data-parallax>
+        <img src="images/room-vertical.webp" alt="ダブルルーム。ベッドと窓、ワークデスク" width="1012" height="1350" loading="lazy" decoding="async">
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="flow" data-screen-label="04 ご利用の流れ">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">04</span>
-      <div>
-        <p class="eyebrow">Flow</p>
-        <h2 class="sec-title">予約からチェックアウトまで、シンプルに。</h2>
-      </div>
-    </div>
-    <div class="flow-grid reveal">
-      <div class="flow-step"><span class="step-no en">01</span><h4>公式サイトで予約</h4><p>空室検索から宿泊日と人数を選択。公式サイトからのご予約がお得です。</p></div>
-      <div class="flow-step"><span class="step-no en">02</span><h4>事前カード決済で完結</h4><p>お支払いはご予約時のクレジットカード決済のみ。事前決済限定のため、現地でのお支払いはありません。</p></div>
-      <div class="flow-step"><span class="step-no en">03</span><h4>セルフチェックイン</h4><p>ご予約後、チェックインコードを登録メールアドレスへお送りします。館内タブレットにコードを入力して手続きし、発行された番号で入室します。<b style="color:var(--navy)">チェックインは16:00から</b>で、16時より前のご入館はできません。</p></div>
-    </div>
-    <div class="flow-photo reveal">
-      <img src="images/checkin.webp" alt="4言語対応セルフチェックイン端末（HOTELSMART）" width="1800" height="1200" loading="lazy">
-      <div class="flow-photo-cap">
-        <p class="cap-en">Self Check-in</p>
-        <h4>4言語対応の端末で、並ばずチェックイン。</h4>
-        <p>日本語・英語・中国語・韓国語に対応した端末で、フロントに並ばずスムーズにチェックイン。深夜・早朝の到着でも待ち時間なくお部屋へ。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="scenes" data-screen-label="滞在シーン">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">—</span>
-      <div>
-        <p class="eyebrow">Stay Scenes</p>
-        <h2 class="sec-title">高萩での一日を、思い浮かべてみてください。</h2>
-        <p class="sec-sub">到着から翌朝の出発まで、当ホテルでの滞在がどんな時間になるかをご紹介します。</p>
-      </div>
-    </div>
-    <div class="scene-lead reveal">
-      <img src="images/scene-night-work.webp" srcset="images/scene-night-work-900.webp 900w, images/scene-night-work.webp 1440w" sizes="(max-width:760px) 100vw, 55vw" alt="夜の客室でデスクに向かい仕事をする様子（イメージ）" width="1440" height="1080" loading="lazy">
-      <div class="scene-lead-cap">
-        <p class="cap-en">Night</p>
-        <h4>夜は、部屋がそのまま仕事場になる。</h4>
-        <p>全室に高速Wi-Fiと有線LAN、ワークデスクを備えています。日中の現場を終えてからの資料づくりやオンライン会議も、部屋を出ずに終えられます。</p>
-      </div>
-    </div>
-    <div class="scene-grid reveal">
-      <div class="scene">
-        <img src="images/scene-checkin.webp" srcset="images/scene-checkin-900.webp 900w, images/scene-checkin.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="タブレット端末でセルフチェックインをする様子（イメージ）" width="1440" height="1080" loading="lazy">
-        <div class="scene-body">
-          <p class="cap-en">Arrival</p>
-          <h4>到着したら、並ばずに。</h4>
-          <p>館内のタブレットで手続きは完了。フロントでの待ち時間はありません。</p>
-        </div>
-      </div>
-      <div class="scene">
-        <img src="images/scene-smartlock.webp" srcset="images/scene-smartlock-900.webp 900w, images/scene-smartlock.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="客室ドアのスマートロックに認証番号を入力する様子（イメージ）" width="1440" height="1080" loading="lazy">
-        <div class="scene-body">
-          <p class="cap-en">Late Night</p>
-          <h4>遅い到着でも、番号ひとつで。</h4>
-          <p>客室はスマートロック。発行された認証番号で、深夜でもそのまま入室できます。</p>
-        </div>
-      </div>
-      <div class="scene">
-        <img src="images/scene-family.webp" srcset="images/scene-family-900.webp 900w, images/scene-family.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="客室のベッドで過ごす親子（イメージ）" width="1440" height="1080" loading="lazy">
-        <div class="scene-body">
-          <p class="cap-en">Weekend</p>
-          <h4>帰省や、家族での滞在にも。</h4>
-          <p>ダブルベッドは2名でご利用いただけます。出張以外の週末の滞在にもどうぞ。</p>
-        </div>
-      </div>
-      <div class="scene">
-        <img src="images/scene-morning.webp" srcset="images/scene-morning-900.webp 900w, images/scene-morning.webp 1440w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" alt="朝の光が差し込む客室と荷造り中のスーツケース（イメージ）" width="1440" height="1080" loading="lazy">
-        <div class="scene-body">
-          <p class="cap-en">Morning</p>
-          <h4>朝は、10時までゆっくりと。</h4>
-          <p>チェックアウトは10時。朝の支度に余裕を持って、次の現場へ向かえます。</p>
-        </div>
-      </div>
-    </div>
-    <p class="scene-note reveal">※ 掲載の写真は滞在イメージです。設備・内装は実際のものと異なる場合があります。</p>
-  </div>
-</section>
-
-<section id="book" class="book" data-screen-label="予約CTA">
-  <div class="grid-deco"></div>
-  <div class="wrap">
-    <p class="eyebrow en">Direct Booking</p>
-    <h2>公式サイトのご予約が、一番お得です。</h2>
-    <div class="direct-merits">
-      <div class="dm-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5L5 19"></path><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
-        <b>会員はいつでも<span class="off en">5%OFF</span></b>
-        <span>無料の会員登録で全プランが5%割引</span>
-      </div>
-      <div class="dm-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"></path></svg>
-        <b>ベストレート保証</b>
-        <span>どの予約サイトよりもお得な料金</span>
-      </div>
-      <div class="dm-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
-        <b>最新の空室状況</b>
-        <span>公式だけのリアルタイム在庫</span>
-      </div>
-      <div class="dm-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-        <b>変更・相談がスムーズ</b>
-        <span>ホテルと直接やり取りできる</span>
-      </div>
-    </div>
-    <button class="btn-primary en" data-tripla-booking-widget="search">空室を検索する / RESERVE →</button>
-  </div>
-</section>
-
-<section id="access" data-screen-label="05 アクセス">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">05</span>
-      <div>
-        <p class="eyebrow">Access</p>
-        <h2 class="sec-title">車移動にも、バス利用にも便利な高戸エリア。</h2>
-        <p class="sec-sub">高萩ICから車で約8分。バス停「高戸入口」から徒歩1分です。</p>
-      </div>
-    </div>
-    <div class="access-grid reveal">
-      <div class="access-info">
-        <dl>
-          <div class="info-row"><dt>所在地</dt><dd>〒318-0002 茨城県高萩市高戸387-12</dd></div>
-          <div class="info-row"><dt>電話</dt><dd><a href="tel:05017920601">050-1792-0601</a>（日中のみ。夜間は無人のため、チャットまたはメールをご利用ください）</dd></div>
-          <div class="info-row"><dt>駐車場</dt><dd>無料・15台（大型車・複数台は法人予約フォームより事前相談）</dd></div>
+<!-- 客室（B型 半分割） -->
+<section class="sec rooms" id="rooms" aria-labelledby="rooms-h">
+  <div class="container">
+    <div class="split">
+      <figure class="photo photo--4x3 split__fig reveal reveal--fig" data-parallax>
+        <img src="images/room-bed.webp" alt="ダブルルーム。ダブルベッドとワークデスク、スマートテレビ" width="1800" height="1200" loading="lazy" decoding="async">
+      </figure>
+      <div class="split__body">
+        <p class="word reveal">stay</p>
+        <h2 class="h2 reveal" id="rooms-h">ダブルルーム、全14室。</h2>
+        <p class="lead reveal">14平方メートルのコンパクトな空間に、ダブルベッドとワークデスク、スマートテレビ、冷蔵庫、電気ケトルを収めました。1名での出張利用を中心に、2名でもご利用いただけます。全室禁煙です。</p>
+        <dl class="spec reveal">
+          <div><dt>Guests</dt><dd><span class="num">1–2</span><small>名</small></dd></div>
+          <div><dt>Size</dt><dd><span class="num">14</span><small>平方メートル</small></dd></div>
+          <div><dt>Bed</dt><dd>ダブルベッド</dd></div>
+          <div><dt>Rate</dt><dd><span class="num">¥6,000–</span><small>1泊・宿泊日と空室状況で変動</small></dd></div>
+          <div><dt>Check in</dt><dd><span class="num">16:00</span><small>から</small></dd></div>
+          <div><dt>Check out</dt><dd><span class="num">10:00</span><small>まで</small></dd></div>
         </dl>
-        <div class="route">
-          <div class="r"><span class="tag en">CAR</span><span class="txt">高萩ICより車で約8分</span></div>
-          <div class="r"><span class="tag en">BUS</span><span class="txt">バス停「高戸入口」より徒歩1分</span></div>
-          <div class="r"><span class="tag en">TRAIN</span><span class="txt">JR常磐線 高萩駅より徒歩24分</span></div>
+      </div>
+    </div>
+    <div class="split split--flip">
+      <div class="figs split__fig">
+        <figure class="photo photo--4x3 reveal reveal--fig">
+          <img src="images/room-desk.webp" alt="スマートテレビとワークデスク、電気ケトル、冷蔵庫" width="1800" height="1350" loading="lazy" decoding="async">
+        </figure>
+        <figure class="photo photo--3x4 reveal reveal--fig">
+          <img src="images/bathroom.webp" alt="ユニットバス。バス・洗面・トイレ" width="1800" height="1200" loading="lazy" decoding="async">
+        </figure>
+      </div>
+      <div class="split__body">
+        <h3 class="h3 reveal">デスクは、仕事の続きができる広さに。</h3>
+        <p class="lead reveal">テレビはYouTubeなどの動画配信を見られるスマートテレビ。パソコンをつなぐHDMIケーブルは貸出品にご用意しています。</p>
+        <p class="equip reveal">高速Wi-Fi ／ 有線LAN ／ スマートテレビ ／ 冷蔵庫 ／ 電気ケトル ／ ユニットバス ／ 個別空調 ／ ドライヤー</p>
+        <p class="small reveal">連泊中の清掃は3日に1回を基本とし、通常日はゴミ回収とタオル交換を中心とした簡易清掃です。チェックアウト時に通常清掃を行います。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 無人チェックイン・ご利用の流れ（D型 色面＋はみ出し写真） -->
+<section class="sec smart" id="smart" aria-labelledby="smart-h">
+  <div class="container">
+    <div class="smart__grid">
+      <div>
+        <p class="label label--dark reveal">Smart Stay<span class="label__jp">ご利用の流れ</span></p>
+        <h2 class="h2 reveal" id="smart-h">予約からチェックアウトまで、<br>人を待たない。</h2>
+        <ol class="steps reveal">
+          <li>
+            <span class="num">01</span>
+            <div><b>公式サイトで予約</b><p>空室検索から宿泊日と人数を選びます。無料の会員登録で、いつでも5%OFFです。</p></div>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <div><b>クレジットカードで事前決済</b><p>お支払いはご予約時に完了します。現地でのお支払いはありません。</p></div>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <div><b>16時から、タブレットでチェックイン</b><p>ご予約後にメールでお送りするチェックインコードを館内のタブレットに入力すると、お部屋の暗証番号が発行されます。日本語・英語・中国語・韓国語に対応。深夜のご到着でもそのままお入りいただけます。</p></div>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <div><b>10時までに、お部屋を出るだけ</b><p>チェックアウトの手続きはありません。館内案内に沿ってお部屋を出れば完了です。</p></div>
+          </li>
+        </ol>
+      </div>
+      <figure class="photo photo--4x3 smart__fig reveal reveal--fig" data-parallax>
+        <img src="images/checkin.webp" alt="4言語対応のセルフチェックイン端末" width="1800" height="1200" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 高萩での一日（E型 中央短文＋コラージュ） -->
+<section class="sec sec--wide scenes" aria-labelledby="scenes-h">
+  <div class="collage" aria-hidden="true">
+    <figure class="collage__item"><img src="images/scene-night-work.webp" srcset="images/scene-night-work-900.webp 900w, images/scene-night-work.webp 1440w" sizes="(max-width:900px) 50vw, 20vw" alt="" width="1440" height="1080" loading="lazy" decoding="async"><figcaption class="collage__cap">滞在イメージ</figcaption></figure>
+    <figure class="collage__item"><img src="images/scene-smartlock.webp" srcset="images/scene-smartlock-900.webp 900w, images/scene-smartlock.webp 1440w" sizes="(max-width:900px) 50vw, 14vw" alt="" width="1440" height="1080" loading="lazy" decoding="async"><figcaption class="collage__cap">滞在イメージ</figcaption></figure>
+    <figure class="collage__item"><img src="images/scene-morning.webp" srcset="images/scene-morning-900.webp 900w, images/scene-morning.webp 1440w" sizes="(max-width:900px) 50vw, 14vw" alt="" width="1440" height="1080" loading="lazy" decoding="async"><figcaption class="collage__cap">滞在イメージ</figcaption></figure>
+    <figure class="collage__item"><img src="images/scene-family.webp" srcset="images/scene-family-900.webp 900w, images/scene-family.webp 1440w" sizes="(max-width:900px) 50vw, 18vw" alt="" width="1440" height="1080" loading="lazy" decoding="async"><figcaption class="collage__cap">滞在イメージ</figcaption></figure>
+  </div>
+  <div class="container">
+    <div class="scenes__text">
+      <p class="label reveal">A day in Takahagi<span class="label__jp">高萩での一日</span></p>
+      <h2 class="h2 reveal" id="scenes-h">夕方、現場から戻って。</h2>
+      <p class="reveal">タブレットで手続きをして、暗証番号でお部屋へ。<br>まずはシャワーを浴びて、ひと息。<br>夜は、デスクで明日の資料を仕上げる。<br>朝は10時まで、急がなくていい。<br>荷物をまとめて、次の現場へ。<br>帰省や、ご家族での週末の滞在にも。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 館内設備・貸出品・アメニティ（F型 罫線リスト） -->
+<section class="sec" id="facilities" aria-labelledby="fac-h">
+  <div class="container">
+    <p class="label reveal">Facilities<span class="label__jp">館内設備</span></p>
+    <h2 class="h2 reveal" id="fac-h">長期の滞在に、困らないように。</h2>
+    <div class="fac__grid">
+      <div class="fac__col">
+        <ul class="rows reveal">
+          <li class="rows__item"><div><b>無料駐車場</b><p>ハイルーフ車も駐車できます。16時前のご到着でも、空きがございましたらご利用いただけます。</p></div><span class="num">15<small>台</small></span></li>
+          <li class="rows__item"><div><b>電子レンジ</b><p>2階に設置。食事の提供はありませんので、持ち込みのお食事の温めにご利用ください。</p></div><span class="num">2<small>階</small></span></li>
+          <li class="rows__item"><div><b>自動販売機</b><p>1階に設置。お飲み物をキャッシュレスでご購入いただけます。</p></div><span class="num">1<small>階</small></span></li>
+          <li class="rows__item"><div><b>屋外喫煙所</b><p>客室内は全室禁煙です。喫煙は屋外の喫煙所をご利用ください。</p></div></li>
+          <li class="rows__item"><div><b>コインランドリー</b><p>現在準備中です。整い次第、こちらでご案内します。</p></div><span class="small">準備中</span></li>
+        </ul>
+      </div>
+      <div class="fac__col">
+        <div class="fac__block reveal">
+          <h3 class="h3">貸出品</h3>
+          <p class="fac__text">HDMIケーブル ／ LANケーブル ／ アイロン ／ ズボンプレッサー ／ 延長コード ／ 各種充電器 ／ 加湿器</p>
+        </div>
+        <div class="fac__block reveal">
+          <h3 class="h3">アメニティ</h3>
+          <p class="fac__text">ヘアブラシ ／ カミソリ ／ ボディタオル ／ コットンセット ／ シェービングクリーム ／ 綿棒 ／ 化粧水・乳液（KOSÉ 雪肌精）</p>
+          <p class="small">出張時の荷物を最小限にして、身軽にお越しください。</p>
+        </div>
+        <figure class="photo photo--4x3 fac__fig reveal reveal--fig" data-parallax>
+          <img src="images/amenity-crop.webp" alt="アメニティ。ヘアブラシ、カミソリ、コットンセット、雪肌精の化粧水と乳液" width="1400" height="1050" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- アクセス（半分割＋F型） -->
+<section class="sec access" id="access" aria-labelledby="access-h">
+  <div class="container">
+    <div class="access__grid">
+      <div>
+        <p class="label reveal">Access<span class="label__jp">アクセス</span></p>
+        <h2 class="h2 reveal" id="access-h">高萩インターチェンジから、<br>車で約8分。</h2>
+        <dl class="info reveal">
+          <div><dt>Address</dt><dd>〒318-0002<br>茨城県高萩市高戸387-12</dd></div>
+          <div><dt>Contact</dt><dd><a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a><br><span class="small">ご質問は画面右下のチャット、またはメールでお受けしています。お電話（050-1792-0601）は日中のみで、夜間は無人のためつながりません</span></dd></div>
+          <div><dt>Car</dt><dd>常磐自動車道 高萩インターチェンジより約8分<br><span class="small">無料駐車場15台。大型車・複数台は事前にご相談ください</span></dd></div>
+          <div><dt>Bus</dt><dd>バス停「高戸入口」より徒歩1分</dd></div>
+          <div><dt>Train</dt><dd>JR常磐線 高萩駅より徒歩24分</dd></div>
+        </dl>
+      </div>
+      <figure class="photo photo--4x3 access__map reveal reveal--fig">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.832705055861!2d140.7186232!3d36.7265789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60217781a68bf7d3%3A0x57c44c89ca0c012f!2z44CSMzE4LTAwMDIg6Iyo5Z-O55yM6auY6JCp5biC6auY5oi477yT77yY77yX4oiS77yR77yS!5e0!3m2!1sja!2sjp!4v1780229682627!5m2!1sja!2sjp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="スマートワークホテル日立高萩の地図"></iframe>
+      </figure>
+    </div>
+
+    <div class="around">
+      <p class="label reveal">Around<span class="label__jp">周辺</span></p>
+      <h2 class="h2 reveal">現場にも、暮らしにも近い高戸。</h2>
+      <div class="around__grid">
+        <div>
+          <h3 class="h3 reveal">現場へ</h3>
+          <ul class="rows reveal">
+            <li class="rows__item"><div><b>松久保工業団地</b><p>アステラス製薬・DAIKEN・高萩ニチハほか</p></div><span class="num">5<small>分</small></span></li>
+            <li class="rows__item"><div><b>赤浜工業団地</b><p>永谷園フーズ茨城工場ほか</p></div><span class="num">5<small>分</small></span></li>
+            <li class="rows__item"><div><b>手綱工業団地</b><p>助川電気工業・極東製薬工業ほか</p></div><span class="num">10<small>分</small></span></li>
+            <li class="rows__item"><div><b>高萩インターチェンジ</b><p>常磐自動車道。各現場への広域移動に</p></div><span class="num">8<small>分</small></span></li>
+            <li class="rows__item"><div><b>北茨城・磯原方面</b><p>国道6号を北上</p></div><span class="num">15<small>分</small></span></li>
+            <li class="rows__item"><div><b>日立市街・工業エリア</b><p>日立製作所関連の事業所方面</p></div><span class="num">25<small>分</small></span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="h3 reveal">滞在中の暮らし</h3>
+          <ul class="rows reveal">
+            <li class="rows__item"><div><b>コンビニエンスストア</b><p>ファミリーマート。24時間営業</p></div><span class="num">3<small>分</small></span></li>
+            <li class="rows__item"><div><b>スーパーマーケット</b><p>カスミ・ベイシア。夜まで営業、食料品の買い出しに</p></div><span class="num">5<small>分</small></span></li>
+            <li class="rows__item"><div><b>飲食店</b><p>ラーメン・居酒屋など。夕食に困らないエリアです</p></div><span class="num">5<small>分</small></span></li>
+          </ul>
+          <p class="small reveal" style="margin-top:20px">いずれも当ホテルから車での所要時間の目安です。</p>
         </div>
       </div>
-      <div style="width:100%;height:100%;min-height:300px">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.832705055861!2d140.7186232!3d36.7265789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60217781a68bf7d3%3A0x57c44c89ca0c012f!2z44CSMzE4LTAwMDIg6Iyo5Z-O55yM6auY6JCp5biC6auY5oi477yT77yY77yX4oiS77yR77yS!5e0!3m2!1sja!2sjp!4v1780229682627!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;min-height:300px;display:block" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="スマートワークホテル日立高萩の地図"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- 公式予約（巨大数字） -->
+<section class="sec sec--wide direct" id="book" aria-labelledby="direct-h">
+  <div class="container">
+    <div class="direct__grid">
+      <div class="reveal">
+        <p class="direct__big"><span data-count="5">5</span>%<small>OFF</small></p>
+        <p class="direct__big-label">無料の会員登録で、いつでも。</p>
+      </div>
+      <div>
+        <p class="label reveal">Direct booking<span class="label__jp">公式予約</span></p>
+        <h2 class="h2 reveal" id="direct-h">公式サイトのご予約が、<br>いちばんお得です。</h2>
+        <ul class="rows reveal">
+          <li class="rows__item"><div><b>会員はいつでも5%OFF</b><p>無料の会員登録で、全プランが5%割引になります。登録はご予約の途中でできます。</p></div></li>
+          <li class="rows__item"><div><b>ベストレート保証</b><p>どの予約サイトよりもお得な料金でご案内します。</p></div></li>
+          <li class="rows__item"><div><b>変更やご相談は、ホテルと直接</b><p>日程の変更やお問い合わせを、間に誰も挟まずにやり取りできます。</p></div></li>
+        </ul>
+        <a href="https://booking.smartworkhotel.jp/" class="btn reveal" data-tripla-booking-widget="search">空室を検索する<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <p class="direct__note reveal">お支払いはご予約時のクレジットカード決済のみです。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="location" class="location" data-screen-label="06 立地・周辺環境">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx en">06</span>
-      <div>
-        <p class="eyebrow">Location</p>
-        <h2 class="sec-title">現場にも、暮らしにも近い。</h2>
-        <p class="sec-sub">高戸エリアは、工業団地への移動も、滞在中の買い物・食事もしやすい立地。出張も長期滞在も、ここを拠点に。</p>
-      </div>
-    </div>
-
-    <div class="loc-cat reveal">
-      <div class="loc-cat-ttl">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"></path><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"></path></svg>
-        ビジネス・現場へ
-      </div>
-      <div class="loc-grid">
-        <div class="loc-item"><span class="name">松久保工業団地</span><span class="dist">車5<span class="u">分</span></span><span class="note">アステラス製薬・DAIKEN・高萩ニチハほか</span></div>
-        <div class="loc-item"><span class="name">赤浜工業団地</span><span class="dist">車5<span class="u">分</span></span><span class="note">永谷園フーズ茨城工場ほか</span></div>
-        <div class="loc-item"><span class="name">手綱工業団地</span><span class="dist">車10<span class="u">分</span></span><span class="note">助川電気工業・極東製薬工業ほか</span></div>
-        <div class="loc-item"><span class="name">高萩IC（常磐道）</span><span class="dist">車8<span class="u">分</span></span><span class="note">各現場への広域移動に</span></div>
-        <div class="loc-item"><span class="name">日立市街・工業エリア</span><span class="dist">車25<span class="u">分</span></span><span class="note">日立製作所関連事業所方面</span></div>
-        <div class="loc-item"><span class="name">北茨城・磯原方面</span><span class="dist">車15<span class="u">分</span></span><span class="note">国道6号で北上</span></div>
-      </div>
-    </div>
-
-    <div class="loc-cat reveal">
-      <div class="loc-cat-ttl">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5M4 9h16v11H4zM9 13h6"></path></svg>
-        滞在中の暮らし
-      </div>
-      <div class="loc-grid">
-        <div class="loc-item"><span class="name">コンビニ（ファミマ）</span><span class="dist">車3<span class="u">分</span></span><span class="note">24時間営業</span></div>
-        <div class="loc-item"><span class="name">スーパー（カスミ・ベイシア）</span><span class="dist">車5<span class="u">分</span></span><span class="note">夜まで営業・食料品の買い出しに</span></div>
-        <div class="loc-item"><span class="name">飲食店（ラーメン・居酒屋など）</span><span class="dist">車5<span class="u">分</span></span><span class="note">夕食に困らないエリア</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" data-screen-label="07 FAQ">
-  <div class="wrap" style="max-width:800px">
-    <div class="sec-head reveal">
-      <span class="idx en">07</span>
-      <div>
-        <p class="eyebrow">FAQ</p>
-        <h2 class="sec-title">ご宿泊前によくある質問。</h2>
-      </div>
-    </div>
-    <div class="faq reveal">
+<!-- よくある質問 -->
+<section class="sec faq" id="faq" aria-labelledby="faq-h">
+  <div class="container container--prose">
+    <p class="label reveal">Questions<span class="label__jp">よくある質問</span></p>
+    <h2 class="h2 reveal" id="faq-h">ご宿泊前に、よくいただく質問。</h2>
+    <div class="faq__list reveal">
       <details><summary>いつオープンしましたか？</summary><div class="ans">2026年6月1日にグランドオープンしました。茨城県高萩市高戸のビジネスホテルです。</div></details>
       <details><summary>現金は使えますか？</summary><div class="ans">当ホテルは事前決済限定です。お支払いはご予約時の各予約サイトでのクレジットカード決済のみとなり、現金・電子マネー・QRコード決済を含め、現地でのお支払いはご利用いただけません。</div></details>
       <details><summary>チェックイン方法を教えてください。</summary><div class="ans">ご予約後、チェックインコードを登録メールアドレスへお送りします。館内タブレットにそのコードを入力してセルフチェックインの手続きを行い、お部屋ごとに発行されるスマートロックの認証番号で入室いただきます。</div></details>
@@ -854,85 +480,79 @@
   </div>
 </section>
 
-<section id="corporate" class="corp" data-screen-label="法人予約">
-  <div class="wrap">
-    <p class="eyebrow en">Corporate Stay</p>
-    <h2>まとまった宿泊・長期滞在のご相談も承ります。</h2>
-    <p>工事・出張・研修など、複数名での宿泊や長期滞在をご検討の企業様は、お問い合わせフォームよりご連絡ください。松久保・手綱・赤浜の各工業団地をはじめ、周辺の工業エリアへの宿泊拠点としてご利用いただけます。</p>
-    <a href="mailto:info@smartworkhotel.jp" class="btn-primary en">法人予約・お問い合わせ →</a>
+<!-- 法人 -->
+<section class="sec corp" id="corporate" aria-labelledby="corp-h">
+  <div class="container">
+    <div class="corp__grid">
+      <div>
+        <p class="label reveal">Corporate<span class="label__jp">法人予約</span></p>
+        <h2 class="h2 reveal" id="corp-h">まとまった宿泊と、<br>長期滞在のご相談。</h2>
+      </div>
+      <div class="corp__body">
+        <p class="reveal">工事・出張・研修など、複数名でのご宿泊や長期のご滞在をご検討の企業様は、メールでご連絡ください。松久保・手綱・赤浜の各工業団地をはじめ、周辺の工業エリアへの宿泊拠点としてご利用いただけます。大型車や複数台の駐車も、あわせてご相談ください。</p>
+        <div class="link-row reveal">
+          <a href="mailto:info@smartworkhotel.jp" class="link-dash">メールで相談する<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer>
-  <div class="foot-wrap">
-    <div>
-      <div class="foot-brand">
-        <img class="brand-mark" src="images/brand-mark.png" alt="" width="264" height="420">
-        <span class="brand-lockup">
-          <img class="brand-word" src="images/brand-wordmark.png" alt="スマートワークホテル" width="1372" height="170">
-          <span class="brand-loc">日立高萩</span>
-        </span>
+</main>
+
+<!-- 巨大英字（G型）＋フッター -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__inner"><span>Smart Work Hotel Hitachi-Takahagi</span><span>Smart Work Hotel Hitachi-Takahagi</span></div>
+  <div class="marquee__inner"><span>Smart Work Hotel Hitachi-Takahagi</span><span>Smart Work Hotel Hitachi-Takahagi</span></div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a href="#top" class="brand" aria-label="スマートワークホテル日立高萩">
+          <img class="brand__mark" src="images/brand-mark.png" alt="" width="264" height="420" loading="lazy">
+          <span class="brand__lockup">
+            <img class="brand__word" src="images/brand-wordmark.png" alt="スマートワークホテル" width="1372" height="170" loading="lazy">
+            <span class="brand__loc">日立高萩</span>
+          </span>
+        </a>
+        <address class="footer__addr">
+          〒318-0002 茨城県高萩市高戸387-12<br>
+          <a href="tel:05017920601" class="tel">050-1792-0601</a>（日中のみ・夜間の対応はいたしかねます）<br>
+          <a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a><br>
+          運営：株式会社Now Resort
+        </address>
       </div>
-      <p class="foot-info">
-        〒318-0002 茨城県高萩市高戸387-12<br>
-        TEL <a href="tel:05017920601">050-1792-0601</a>（日中のみ・夜間の対応はいたしかねます）<br>
-        運営：株式会社Now Resort<br>
-        <a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a>
-      </p>
+      <nav class="footer__links" aria-label="フッターメニュー">
+        <a href="#rooms">客室</a>
+        <a href="#smart">ご利用の流れ</a>
+        <a href="#facilities">館内設備</a>
+        <a href="#access">アクセス</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#corporate">法人予約・お問い合わせ</a>
+        <a href="terms.html">宿泊約款・利用規則</a>
+        <a href="terms.html#tokusho">特定商取引法に基づく表記</a>
+      </nav>
+      <div class="footer__book">
+        <a href="https://booking.smartworkhotel.jp/" class="btn btn--light" data-tripla-booking-widget="search">空室を検索する<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <p>公式サイトが最安。無料の会員登録でいつでも5%OFF。お支払いはご予約時のクレジットカード決済のみです。</p>
+      </div>
     </div>
-    <div class="foot-links">
-      <a href="#rooms">客室</a>
-      <a href="#facilities">館内設備</a>
-      <a href="#access">アクセス</a>
-      <a href="#faq">よくある質問</a>
-      <a href="#corporate">法人予約・お問い合わせ</a>
-      <a href="terms.html">宿泊約款・利用規則</a>
-      <a href="terms.html#tokusho">特定商取引法に基づく表記</a>
+    <div class="footer__copy">
+      <span>© 2026 Smart Work Hotel Hitachi-Takahagi</span>
+      <span>Takado, Takahagi, Ibaraki</span>
     </div>
   </div>
-  <div class="foot-copy en">© 2026 Smart Work Hotel Hitachi-Takahagi. All rights reserved.</div>
 </footer>
 
-<!-- スマホ下部固定バー -->
-<div class="sp-fixed-bar">
-  <a href="tel:05017920601" class="sp-tel">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.5a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"></path></svg>
-    電話する
-  </a>
-  <a href="#access" class="sp-access">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-    アクセス
-  </a>
-  <a href="https://booking.smartworkhotel.jp/" class="sp-reserve" data-tripla-booking-widget="search">
-    <span class="best">公式が最安・会員登録で5%OFF</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:18px;height:18px"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
-    空室を確認・予約する
-  </a>
+<a href="https://booking.smartworkhotel.jp/" class="cta-fixed" data-tripla-booking-widget="search"><span class="en">Reserve</span><span class="jp">空室を検索・予約する</span></a>
+<div class="sp-bar">
+  <a href="https://booking.smartworkhotel.jp/" class="sp-bar__book" data-tripla-booking-widget="search">空室を検索・予約する<span class="en">↗</span></a>
 </div>
 
-<script>
-
-  // ===== ドロワー（880px以下でヘッダーのナビが隠れるため） =====
-  (function(){
-    const burger=document.getElementById('navBurger'), drawer=document.getElementById('drawer');
-    if(!burger||!drawer) return;
-    const close=()=>{document.body.classList.remove('drawer-open');burger.setAttribute('aria-expanded','false');};
-    burger.addEventListener('click',()=>{
-      const open=document.body.classList.toggle('drawer-open');
-      burger.setAttribute('aria-expanded',String(open));
-      burger.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');
-    });
-    // 行き先へ移動したら閉じる。予約ウィジェットのボタンは tripla 側が処理するので触らない
-    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  })();
-
-  // ===== スクロールリビール =====
-  const io=new IntersectionObserver((es)=>{
-    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
-  },{threshold:.08});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
-
+<script src="js/gsap.min.js?v=3.13.0" defer></script>
+<script src="js/ScrollTrigger.min.js?v=3.13.0" defer></script>
+<script src="js/lenis.min.js?v=1.3.26" defer></script>
+<script src="js/main.js?v=20260910" defer></script>
 </body>
 </html>

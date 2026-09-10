@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Zen Kaku Gothic New を使用文字だけに絞って fonts/ に置く（太田ナウ・サンモールと同じ方式）。
+"""Zen Kaku Gothic New と Barlow を使用文字だけに絞って fonts/ に置く（太田ナウ・サンモールと同じ方式）。
 
 Google Fonts の分割配信だとトップページで93ファイル・835KB（転送量の38%）だった。
 実際に使う文字＋かな・英数・記号に絞った1ファイル/ウェイトへ畳んで自前配信する。
-欧文（Outfit）は32KBなので Google Fonts のまま。
+欧文の Barlow は英数字と記号だけの小さなサブセットにする（見出しの英字・数字専用）。
 
   python tools/build-fonts.py
 
@@ -24,12 +24,17 @@ CONTENT_FILES = ["index.html", "terms.html", "llms.txt"]
 
 # Google Fonts が旧UAに返す非分割WOFF（css?family=...&subset=japanese で取る。
 # subset 無しだと欧文だけの小さいファイルが返るので注意）。
-# ウェイトはCSSで指定している 400/500/700/900（600・800 は Outfit 側）。
-SOURCES = {
+# 日本語のウェイトは 400/500/700 をトップで、900 は terms.html が使う。
+JAPANESE_SOURCES = {
     "zen-kaku-gothic-new-400": "https://fonts.gstatic.com/s/zenkakugothicnew/v18/gNMYW2drQpDw0GjzrVNFf_valaDBcznOojRoSg.woff",
     "zen-kaku-gothic-new-500": "https://fonts.gstatic.com/s/zenkakugothicnew/v18/gNMVW2drQpDw0GjzrVNFf_valaDBcznOqs9LWWvYSw.woff",
     "zen-kaku-gothic-new-700": "https://fonts.gstatic.com/s/zenkakugothicnew/v18/gNMVW2drQpDw0GjzrVNFf_valaDBcznOqodNWWvYSw.woff",
     "zen-kaku-gothic-new-900": "https://fonts.gstatic.com/s/zenkakugothicnew/v18/gNMVW2drQpDw0GjzrVNFf_valaDBcznOqr9PWWvYSw.woff",
+}
+LATIN_SOURCES = {
+    "barlow-400": "https://fonts.gstatic.com/s/barlow/v13/7cHpv4kjgoGqM7E_DMs_.woff",
+    "barlow-500": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3_-gs51oq.woff",
+    "barlow-600": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E30-8s51oq.woff",
 }
 LEGACY_USER_AGENT = (
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 "
@@ -40,6 +45,7 @@ EXTRA_SYMBOLS = (
     "（）〔〕［］｛｝〈〉《》「」『』【】＋－±×÷＝≠＜＞≦≧∞∴"
     "°′″℃￥＄％＃＆＊＠§☆★○●◎◇◆□■△▲▽▼※〒→←↑↓㎡"
 )
+LATIN_EXTRA_SYMBOLS = "¥–—‐·•×°±→←↑↓↗©"
 
 
 def collect_used_characters():
@@ -60,6 +66,12 @@ def collect_safety_net_characters():
     return kana | ascii_printable | fullwidth | set(EXTRA_SYMBOLS)
 
 
+def collect_latin_characters():
+    ascii_printable = set(chr(c) for c in range(0x20, 0x7F))
+    latin1 = set(chr(c) for c in range(0xA0, 0x100))
+    return ascii_printable | latin1 | set(LATIN_EXTRA_SYMBOLS)
+
+
 def download_source(name, url):
     os.makedirs(CACHE_DIR, exist_ok=True)
     path = os.path.join(CACHE_DIR, name + ".woff")
@@ -74,7 +86,7 @@ def build_subset(source_path, output_path, characters):
     font = TTFont(source_path)
     options = Options()
     options.flavor = "woff2"
-    options.layout_features = ["kern", "liga", "palt"]
+    options.layout_features = ["kern", "liga", "palt", "tnum", "pnum"]
     options.desubroutinize = False
     options.notdef_outline = True
     subsetter = Subsetter(options=options)
@@ -85,18 +97,24 @@ def build_subset(source_path, output_path, characters):
     font.close()
 
 
-def main():
-    characters = collect_used_characters() | collect_safety_net_characters()
-    print("文字数 %d" % len(characters))
-    os.makedirs(OUT_DIR, exist_ok=True)
+def build_family(sources, characters):
     total = 0
-    for name, url in SOURCES.items():
+    for name, url in sources.items():
         output_path = os.path.join(OUT_DIR, name + ".woff2")
         build_subset(download_source(name, url), output_path, characters)
         size = os.path.getsize(output_path)
         total += size
         print("  %-28s %7.1f KB" % (name + ".woff2", size / 1024))
-    print("合計 %.1f KB / %d ファイル" % (total / 1024, len(SOURCES)))
+    return total
+
+
+def main():
+    japanese_characters = collect_used_characters() | collect_safety_net_characters()
+    print("日本語 文字数 %d" % len(japanese_characters))
+    os.makedirs(OUT_DIR, exist_ok=True)
+    total = build_family(JAPANESE_SOURCES, japanese_characters)
+    total += build_family(LATIN_SOURCES, collect_latin_characters())
+    print("合計 %.1f KB / %d ファイル" % (total / 1024, len(JAPANESE_SOURCES) + len(LATIN_SOURCES)))
     return 0
 
 
