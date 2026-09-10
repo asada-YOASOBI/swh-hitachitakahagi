@@ -380,8 +380,7 @@ body.in-fv .cta-fixed,body.at-footer .cta-fixed,body.menu-open .cta-fixed{transf
   body{padding-bottom:56px}
 }
 
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .reveal,.reveal--fig{opacity:1;transform:none;clip-path:none}
-  .marquee__inner{animation:none}
-}
+/* 静止撮影用（tools/shots.mjs が html に付ける）。OSの「動きを減らす」設定では止めない＝りり指示 */
+html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+html.no-motion .reveal,html.no-motion .reveal--fig{opacity:1;transform:none;clip-path:none}
+html.no-motion .marquee__inner{animation:none}

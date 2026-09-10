@@ -7,7 +7,9 @@
   var ANCHOR_OFFSET_PX = -72;
   var body = document.body;
   var header = document.querySelector('.header');
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // OS の「動きを減らす」設定では止めない（りり指示：動的HP。りりのWindowsはこの設定がONで、止めると動きが一切見えない）。
+  // 静止撮影用の html.no-motion でだけ止める
+  var prefersReducedMotion = document.documentElement.classList.contains('no-motion');
   var hasGsap = typeof window.gsap === 'object' || typeof window.gsap === 'function';
   var useMotion = !prefersReducedMotion && hasGsap;
 

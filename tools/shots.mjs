@@ -37,8 +37,11 @@ try {
     await page.setViewport(viewport);
     page.on('console', (m) => { if (m.type() === 'error') errors.push(`[${dev}] ${m.text()}`); });
     page.on('pageerror', (e) => errors.push(`[${dev}] ${e.message}`));
-    // 出現アニメを止めて全要素を写す。ヘッドレスChromeは既定で reduce になるので、それを利用する
-    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    // 出現アニメを止めて全要素を写す（OS の reduce 設定は無視する設計なので、検証用クラスで止める）
+    await page.evaluateOnNewDocument((() => {
+      const add = () => { if (document.documentElement) { document.documentElement.classList.add('no-motion'); return true; } return false; };
+      if (!add()) new MutationObserver((_, o) => { if (add()) o.disconnect(); }).observe(document, { childList: true });
+    }));
     for (const p of PAGES) {
       await page.goto(`http://localhost:${PORT}${p}`, { waitUntil: 'networkidle0' });
       await page.evaluate(() => document.fonts.ready);
