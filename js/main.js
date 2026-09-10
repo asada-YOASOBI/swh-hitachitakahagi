@@ -10,25 +10,8 @@
   // OS の「動きを減らす」設定では止めない（りり指示：動的HP。りりのWindowsはこの設定がONで、止めると動きが一切見えない）。
   // 静止撮影用の html.no-motion でだけ止める
   var prefersReducedMotion = document.documentElement.classList.contains('no-motion');
-  var hasGsap = typeof window.gsap === 'object' || typeof window.gsap === 'function';
-  var useMotion = !prefersReducedMotion && hasGsap;
-
-  // ---------- 慣性スクロール（Lenis）。reduce 指定時と未読込時は素のスクロール ----------
+  // 動き（GSAP・Lenis）は描画後にフッターの読み込み処理が読み、swh:motion-ready を投げてから initMotion が動く
   var lenis = null;
-  if (!prefersReducedMotion && typeof window.Lenis === 'function') {
-    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
-    if (useMotion) {
-      window.gsap.registerPlugin(window.ScrollTrigger);
-      lenis.on('scroll', window.ScrollTrigger.update);
-      window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-      window.gsap.ticker.lagSmoothing(0);
-    } else {
-      var raf = function (time) { lenis.raf(time); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
-    }
-  } else if (useMotion) {
-    window.gsap.registerPlugin(window.ScrollTrigger);
-  }
 
   // ページ内リンク。tripla の予約ボタンは data 属性で SDK が拾うので触らない
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
@@ -103,18 +86,23 @@
     revealTargets.forEach(function (el) { observer.observe(el); });
   }
 
-  if (!useMotion) return;
 
-  var gsap = window.gsap;
-  var ScrollTrigger = window.ScrollTrigger;
+  function initMotion() {
+    if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger) return;
+    var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window.Lenis === 'function') {
+      lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
 
   // ---------- ファーストビュー：写真がゆっくり寄り、スクロールで沈む ----------
   function fvMotion() {
     if (!fv) return;
-    gsap.from('.fv__pic img', { scale: 1.08, duration: 2.4, ease: 'power2.out' });
-    gsap.from('.fv__eyebrow, .fv__catch, .fv__lead', { autoAlpha: 0, y: 26, duration: 1, ease: 'power2.out', stagger: 0.14, delay: 0.3 });
-    gsap.from('.fv__facts, .fv__scroll', { autoAlpha: 0, duration: 1, ease: 'power2.out', delay: 1.1 });
-    gsap.from('.header .brand, .header .nav a, .header .pill', { autoAlpha: 0, y: -10, duration: 0.8, ease: 'power2.out', stagger: 0.06, delay: 0.9, clearProps: 'all' });
+    gsap.from('.fv__pic img', { scale: 1.06, duration: 2, ease: 'power2.out' });
     gsap.fromTo('.fv__scroll i', { scaleY: 0 }, { scaleY: 1, duration: 1.4, ease: 'power2.inOut', repeat: -1, repeatDelay: 0.4, transformOrigin: 'top' });
     gsap.to('.fv__pic', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: fv, start: 'top top', end: 'bottom top', scrub: true } });
     gsap.to('.fv__body, .fv__facts', { autoAlpha: 0, y: -30, ease: 'none', scrollTrigger: { trigger: fv, start: '35% top', end: '85% top', scrub: true } });
@@ -166,11 +154,13 @@
     });
   }
 
-  document.fonts.ready.then(function () {
     fvMotion();
     noticePin();
     countUp();
     gsap.matchMedia().add('(min-width: 901px)', function () { parallaxPhotos(); });
     ScrollTrigger.refresh();
-  });
+  }
+
+  if (window.gsap && window.ScrollTrigger) initMotion();
+  else document.addEventListener('swh:motion-ready', initMotion);
 })();

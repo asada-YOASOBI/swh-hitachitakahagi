@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="{{CANONICAL}}">
+<link rel="icon" href="/favicon.ico?v=20260629" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="/images/favicon.png?v=20260629">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20260629">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#1d3d4c">
+<meta name="author" content="株式会社Now Resort">
+<meta name="geo.region" content="JP-08">
+<meta name="geo.placename" content="茨城県高萩市">
+<meta name="geo.position" content="36.7265789;140.7186232">
+<meta name="ICBM" content="36.7265789, 140.7186232">
+{{PRELOAD}}
+<!-- 書体は使用文字だけに絞って自前配信（tools/build-fonts.py で生成）。CSS はビルドで同梱する（tools/build.mjs） -->
+<style>
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-400.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-500.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/zen-kaku-gothic-new-700.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/barlow-400.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/barlow-500.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/barlow-600.woff2') format('woff2')}
+{{CSS}}
+</style>
+
+<meta property="og:site_name" content="スマートワークホテル日立高萩">
+<meta property="og:title" content="{{OG_TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:type" content="{{OG_TYPE}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:image" content="https://www.smartworkhotel.jp/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="スマートワークホテル日立高萩 外観（夕景）">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{OG_TITLE}}">
+<meta name="twitter:description" content="{{DESCRIPTION}}">
+<meta name="twitter:image" content="https://www.smartworkhotel.jp/images/og.jpg">
+
+{{SCHEMA}}
+<link rel="preconnect" href="https://tripla.jp">
+<link rel="dns-prefetch" href="https://triplabot-production.tripla.ai">
+</head>
+<body class="{{BODY_CLASS}}">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 18 10"><path d="M0 5h17M12 .6 17 5l-5 4.4"/></symbol>
+</svg>
+
+{{HEADER}}
+
+<main id="top">
+{{BODY}}
+</main>
+
+{{FOOTER}}
+</body>
+</html>

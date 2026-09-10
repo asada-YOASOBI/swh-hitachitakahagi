@@ -159,6 +159,38 @@ body.menu-open .overlay{opacity:1;visibility:visible;transition:opacity .45s var
 .overlay__sub .tel{font-family:var(--font-en);font-size:28px;letter-spacing:.06em;display:block}
 .overlay__sub .btn{margin-top:8px;width:fit-content}
 
+/* ---------- 下層ページのヘッダーと見出し ---------- */
+body.is-sub .header{color:var(--color-text);background:rgba(243,243,242,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+body.is-sub .header .brand img{filter:none}
+body.is-sub .header .pill{border-color:var(--color-line)}
+body.is-sub .header .pill--book{border-color:transparent}
+body.is-sub.menu-open .header{background:transparent;backdrop-filter:none;color:var(--color-on-dark)}
+body.is-sub.menu-open .header .brand img{filter:brightness(0) invert(1)}
+.phead{padding:calc(var(--header-h) + 72px) 0 72px;border-bottom:1px solid var(--color-line)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:12px;letter-spacing:.1em;color:var(--color-text-soft)}
+.crumbs a{text-decoration:none}
+.crumbs li+li::before{content:"/";margin-right:10px;opacity:.5}
+.phead .label{margin-top:40px}
+.phead__h1{font-size:clamp(26px,2.6vw,34px);font-weight:500;line-height:1.6;letter-spacing:.12em;margin-top:18px;text-wrap:balance}
+.phead__lead{margin-top:24px;font-size:16px;line-height:2;letter-spacing:.05em;max-width:38em;text-wrap:pretty}
+.phead__grid{display:grid;grid-template-columns:minmax(0,1fr) 40%;gap:clamp(32px,6vw,96px);align-items:end}
+.sec--first{padding-top:96px}
+.prose{max-width:var(--prose)}
+.prose p{margin-top:1.2em;line-height:2;text-wrap:pretty}
+.prose p:first-child{margin-top:0}
+.prose .h3{margin-top:56px}
+.prose .h3:first-child{margin-top:0}
+.prose .rows{margin-top:24px}
+.dl{margin-top:36px;border-top:1px solid var(--color-line)}
+.dl div{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--color-line);font-size:14.5px;line-height:1.9}
+.dl dt{font-weight:500;letter-spacing:.08em;color:var(--color-text-soft)}
+.dl dd a{text-decoration:none;border-bottom:1px solid var(--color-line)}
+.related{margin-top:96px;padding-top:40px;border-top:1px solid var(--color-line)}
+.related__list{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.footer__ota{margin-top:12px!important}
+.footer__ota a{text-decoration:none;color:var(--color-on-dark);border-bottom:1px solid var(--color-line-dark)}
+.faq__list details:target summary{color:var(--color-key)}
+
 /* ---------- ファーストビュー（A型 額縁） ---------- */
 .fv{padding:var(--frame) var(--frame) 0;height:100svh;min-height:620px}
 .fv__frame{position:relative;height:100%;border-radius:3px;overflow:hidden;background:var(--color-key-deep)}
@@ -320,6 +352,8 @@ body.in-fv .cta-fixed,body.at-footer .cta-fixed,body.menu-open .cta-fixed{transf
   .nav{display:none}
 }
 @media (max-width:900px){
+  .phead__grid{grid-template-columns:1fr}
+  .dl div{grid-template-columns:120px 1fr}
   .notice__grid,.concept__grid,.split,.smart__grid,.fac__grid,.access__grid,.around__grid,.direct__grid,.corp__grid,.footer__grid,.overlay__in{grid-template-columns:1fr}
   .concept__fig{margin-top:0;order:-1;max-width:520px}
   .split__fig,.split--flip .split__body{margin-top:0}
@@ -344,6 +378,10 @@ body.in-fv .cta-fixed,body.at-footer .cta-fixed,body.menu-open .cta-fixed{transf
   .sec{padding-block:80px}
   .sec--tight{padding-block:56px}
   .sec--wide{padding-block:120px}
+  .sec--first{padding-top:64px}
+  .phead{padding:calc(var(--header-h) + 40px) 0 48px}
+  .phead__h1{font-size:24px}
+  .dl div{grid-template-columns:1fr;gap:4px;padding:12px 0}
   .h2{font-size:22px;letter-spacing:.1em}
   .lead{font-size:15px}
   .pill{height:36px;padding:0 14px;font-size:12px}

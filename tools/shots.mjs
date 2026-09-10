@@ -27,7 +27,7 @@ const server = createServer(async (req, res) => {
 }).listen(PORT);
 
 const PAGES = process.argv[2] ? process.argv[2].split(',') : ['/', '/terms.html'];
-const name = (p, dev) => (p === '/' ? 'index' : p.replace(/^\//, '').replace(/\.html$/, '')) + (dev === 'm' ? '-m' : '');
+const name = (p, dev) => (p === '/' ? 'index' : p.replace(/^\/|\/$/g, '').replace(/\.html$/, '').replace(/\//g, '-')) + (dev === 'm' ? '-m' : '');
 const errors = [];
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--hide-scrollbars'] });

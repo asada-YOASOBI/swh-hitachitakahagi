@@ -1,0 +1,85 @@
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__inner"><span>Smart Work Hotel Hitachi-Takahagi</span><span>Smart Work Hotel Hitachi-Takahagi</span></div>
+  <div class="marquee__inner"><span>Smart Work Hotel Hitachi-Takahagi</span><span>Smart Work Hotel Hitachi-Takahagi</span></div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a href="/" class="brand" aria-label="スマートワークホテル日立高萩">
+          <img class="brand__mark" src="/images/brand-mark.webp" alt="" width="75" height="120" loading="lazy">
+          <span class="brand__lockup">
+            <img class="brand__word" src="/images/brand-wordmark.webp" alt="スマートワークホテル" width="387" height="48" loading="lazy">
+            <span class="brand__loc">日立高萩</span>
+          </span>
+        </a>
+        <address class="footer__addr">
+          スマートワークホテル日立高萩<br>
+          〒318-0002 茨城県高萩市高戸387-12<br>
+          <a href="tel:05017920601" class="tel">050-1792-0601</a>（日中のみ・夜間の対応はいたしかねます）<br>
+          <a href="mailto:info@smartworkhotel.jp">info@smartworkhotel.jp</a><br>
+          運営：<a href="/company/">株式会社Now Resort</a>
+        </address>
+      </div>
+      <nav class="footer__links" aria-label="フッターメニュー">
+        <a href="/rooms/">客室</a>
+        <a href="/guide/">ご利用の流れ</a>
+        <a href="/facilities/">館内設備・アメニティ</a>
+        <a href="/access/">アクセス・周辺</a>
+        <a href="/faq/">よくある質問</a>
+        <a href="/corporate/">法人予約・長期滞在</a>
+        <a href="/company/">運営会社</a>
+        <a href="/terms.html">宿泊約款・利用規則</a>
+        <a href="/terms.html#tokusho">特定商取引法に基づく表記</a>
+      </nav>
+      <div class="footer__book">
+        <a href="https://booking.smartworkhotel.jp/" class="btn btn--light" data-tripla-booking-widget="search">空室を検索する<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <p>公式サイトが最安。無料の会員登録でいつでも5%OFF。お支払いはご予約時のクレジットカード決済のみです。</p>
+        <p class="footer__ota">ほかの予約サイト：<a href="https://travel.rakuten.co.jp/HOTEL/201916/201916.html" rel="noopener">楽天トラベル</a> ／ <a href="https://www.jalan.net/yad357147/" rel="noopener">じゃらんnet</a> ／ <a href="https://travel.yahoo.co.jp/00924750/" rel="noopener">Yahoo!トラベル</a></p>
+      </div>
+    </div>
+    <div class="footer__copy">
+      <span>© 2026 Smart Work Hotel Hitachi-Takahagi</span>
+      <span>Takado, Takahagi, Ibaraki</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://booking.smartworkhotel.jp/" class="cta-fixed" data-tripla-booking-widget="search"><span class="en">Reserve</span><span class="jp">空室を検索・予約する</span></a>
+<div class="sp-bar">
+  <a href="https://booking.smartworkhotel.jp/" class="sp-bar__book" data-tripla-booking-widget="search">空室を検索・予約する<span class="en">↗</span></a>
+</div>
+
+<script src="/js/main.js?v={{VERSION}}" defer></script>
+<script>
+// 動き（GSAP・Lenis）は描画が終わってから読む。tripla の予約ウィジェットとチャットは、最初の操作か、読み込み完了の6秒後に読む。
+// どちらも読み込む前は、予約ボタンが booking.smartworkhotel.jp へそのまま遷移する。
+(function () {
+  var VERSION = '{{VERSION}}';
+  function load(src, done) { var s = document.createElement('script'); s.src = src; s.onload = done; document.body.appendChild(s); }
+  function startMotion() {
+    if (document.documentElement.classList.contains('no-motion')) return;
+    load('/js/gsap.min.js?v=3.13.0', function () {
+      load('/js/ScrollTrigger.min.js?v=3.13.0', function () {
+        load('/js/lenis.min.js?v=1.3.26', function () { document.dispatchEvent(new Event('swh:motion-ready')); });
+      });
+    });
+  }
+  var triplaLoaded = false;
+  function loadTripla() {
+    if (triplaLoaded) return;
+    triplaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://tripla.jp/sdk/javascript/tripla.min.js';
+    s.setAttribute('data-triplabot-code', '019e5d43-ca8e-742a-ab76-6987cc0cc2af');
+    s.setAttribute('data-triplabot-draggable', 'true');
+    document.head.appendChild(s);
+  }
+  ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (name) {
+    window.addEventListener(name, loadTripla, { once: true, passive: true });
+  });
+  function onLoad() { startMotion(); window.setTimeout(loadTripla, 6000); }
+  if (document.readyState === 'complete') onLoad(); else window.addEventListener('load', onLoad);
+})();
+</script>
