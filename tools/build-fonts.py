@@ -20,7 +20,11 @@ from fontTools.ttLib import TTFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "fonts")
 CACHE_DIR = os.path.join(ROOT, "tools", "font-src")
-CONTENT_FILES = ["index.html", "terms.html", "llms.txt"]
+# トップに出る文字＝core（1ファイル）、それ以外のページにだけ出る文字＝ext（unicode-range で必要なときだけ読む）
+CORE_FILES = ["index.html"]
+EXT_FILES = ["rooms/index.html", "guide/index.html", "facilities/index.html", "access/index.html",
+             "faq/index.html", "corporate/index.html", "company/index.html", "404.html", "terms.html", "llms.txt"]
+RANGE_FILE = os.path.join(ROOT, "fonts", "ext-unicode-range.txt")
 
 # Google Fonts が旧UAに返す非分割WOFF（css?family=...&subset=japanese で取る。
 # subset 無しだと欧文だけの小さいファイルが返るので注意）。
@@ -48,9 +52,9 @@ EXTRA_SYMBOLS = (
 LATIN_EXTRA_SYMBOLS = "¥–—‐·•×°±→←↑↓↗©"
 
 
-def collect_used_characters():
+def collect_used_characters(files):
     used = set()
-    for relative_path in CONTENT_FILES:
+    for relative_path in files:
         path = os.path.join(ROOT, relative_path)
         if not os.path.exists(path):
             print("  警告: %s が無いので飛ばした" % relative_path)
@@ -108,13 +112,35 @@ def build_family(sources, characters):
     return total
 
 
+def unicode_range(characters):
+    """連続する符号位置をまとめて U+XXXX-YYYY 形式にする"""
+    points = sorted(ord(c) for c in characters)
+    ranges = []
+    start = prev = points[0]
+    for cp in points[1:]:
+        if cp == prev + 1:
+            prev = cp
+            continue
+        ranges.append((start, prev))
+        start = prev = cp
+    ranges.append((start, prev))
+    return ", ".join("U+%04X" % a if a == b else "U+%04X-%04X" % (a, b) for a, b in ranges)
+
+
 def main():
-    japanese_characters = collect_used_characters() | collect_safety_net_characters()
-    print("日本語 文字数 %d" % len(japanese_characters))
+    core = collect_used_characters(CORE_FILES) | collect_safety_net_characters()
+    ext = collect_used_characters(EXT_FILES) - core
+    print("core 文字数 %d / ext 文字数 %d" % (len(core), len(ext)))
     os.makedirs(OUT_DIR, exist_ok=True)
-    total = build_family(JAPANESE_SOURCES, japanese_characters)
+    # 900 は terms.html だけが使うので分けない（全文字1ファイル）
+    core_sources = {k: v for k, v in JAPANESE_SOURCES.items() if not k.endswith("-900")}
+    total = build_family(core_sources, core)
+    total += build_family({k + "-ext": v for k, v in core_sources.items()}, ext)
+    total += build_family({k: v for k, v in JAPANESE_SOURCES.items() if k.endswith("-900")}, core | ext)
     total += build_family(LATIN_SOURCES, collect_latin_characters())
-    print("合計 %.1f KB / %d ファイル" % (total / 1024, len(JAPANESE_SOURCES) + len(LATIN_SOURCES)))
+    open(RANGE_FILE, "w", encoding="utf-8").write(unicode_range(ext))
+    print("合計 %.1f KB" % (total / 1024))
+    print("ext の unicode-range を %s に書いた" % os.path.relpath(RANGE_FILE, ROOT))
     return 0
 
 

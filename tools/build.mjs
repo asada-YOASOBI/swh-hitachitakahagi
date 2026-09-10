@@ -80,7 +80,7 @@ function schemaFor(meta) {
 }
 
 // ---------- ページ ----------
-const layout = read('src/layout.html');
+const layout = read('src/layout.html').replace(/\{\{EXT_RANGE\}\}/g, read('fonts/ext-unicode-range.txt').trim());
 const header = read('src/partials/header.html');
 const footer = read('src/partials/footer.html').replace(/\{\{VERSION\}\}/g, VERSION);
 const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
