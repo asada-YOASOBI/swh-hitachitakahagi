@@ -33,7 +33,7 @@ body = body.replace(/<iframe[\s\S]*?<\/iframe>/, '<div style="position:absolute;
 const scripts = ['js/gsap.min.js', 'js/ScrollTrigger.min.js', 'js/lenis.min.js', 'js/main.js'].map((f) => `<script>${readFileSync(join(ROOT, f), 'utf8')}</script>`).join('\n');
 body = body.replace(/<script src="js\/[^"]+" defer><\/script>\s*/g, '');
 
-const page = `<title>高萩HP プレビュー</title>
+const page = `<title>スマートワークホテル日立高萩 新トップ</title>
 <style>${fontFaces}\n${css}\n#claude-artifact-root,body{background:#f3f3f2}</style>
 ${body}
 ${scripts}`;
