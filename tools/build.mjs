@@ -33,7 +33,7 @@ const hotel = {
   url: `${ORIGIN}/`,
   image: site.images.map((p) => `${ORIGIN}${p}`),
   logo: `${ORIGIN}/images/brand-mark.png`,
-  telephone: site.telephoneIntl, email: site.email,
+  email: site.email,
   priceRange: site.priceRange, currenciesAccepted: 'JPY', paymentAccepted: 'Credit Card',
   foundingDate: site.openingDate,
   petsAllowed: false, smokingAllowed: false,
@@ -60,7 +60,7 @@ const organization = {
   '@type': 'Organization', '@id': orgId, name: site.company.name, url: `${ORIGIN}/company/`,
   founder: { '@type': 'Person', name: site.company.representative, jobTitle: '代表取締役' },
   address: { '@type': 'PostalAddress', postalCode: site.company.postalCode, addressRegion: '群馬県', addressLocality: '太田市', streetAddress: '飯田町1267', addressCountry: 'JP' },
-  email: site.email, telephone: site.telephoneIntl,
+  email: site.email,
 };
 const website = { '@type': 'WebSite', '@id': `${ORIGIN}/#website`, url: `${ORIGIN}/`, name: site.name, inLanguage: 'ja', publisher: { '@id': orgId } };
 

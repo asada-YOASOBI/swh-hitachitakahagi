@@ -1,9 +1,7 @@
 {
   "name": "スマートワークホテル日立高萩",
   "nameEn": "Smart Work Hotel Hitachi-Takahagi",
-  "description": "茨城県高萩市高戸のビジネスホテル。2026年6月1日開業。セルフチェックイン、全室高速Wi-Fi・有線LAN、無料駐車場15台。ダブルルーム全14室、1泊6,000円から。事前クレジットカード決済のみ（現地決済なし）。チェックイン16:00、チェックアウト10:00。",
-  "telephone": "050-1792-0601",
-  "telephoneIntl": "+81-50-1792-0601",
+  "description": "茨城県高萩市高戸のビジネスホテル。2026年6月1日開業。セルフチェックイン、全室高速Wi-Fi・有線LAN、無料駐車場15台。ダブルルーム全14室、1泊6,000円から。事前クレジットカード決済のみ（現地決済なし）。チェックイン16:00、チェックアウト10:00。フロントは無人で、お手続きはメールと館内タブレットで行う。",
   "email": "info@smartworkhotel.jp",
   "postalCode": "318-0002",
   "lat": 36.7265789,
@@ -15,14 +13,40 @@
   "rooms": "14",
   "checkin": "16:00",
   "checkout": "10:00",
-  "images": ["/images/exterior-night.jpg", "/images/room-bed.jpg", "/images/room-desk.jpg", "/images/checkin.jpg"],
+  "images": [
+    "/images/exterior-night.jpg",
+    "/images/room-bed.jpg",
+    "/images/room-desk.jpg",
+    "/images/checkin.jpg"
+  ],
   "sameAs": [
     "https://travel.rakuten.co.jp/HOTEL/201916/201916.html",
     "https://www.jalan.net/yad357147/",
     "https://travel.yahoo.co.jp/00924750/"
   ],
-  "amenities": ["高速Wi-Fi", "有線LAN", "無料駐車場（15台）", "セルフチェックイン（4言語対応）", "スマートロック", "電子レンジ", "自動販売機", "屋外喫煙所", "個別空調", "冷蔵庫"],
-  "roomAmenities": ["高速Wi-Fi", "有線LAN", "スマートテレビ", "冷蔵庫", "電気ケトル", "ユニットバス", "個別空調", "ドライヤー", "ワークデスク"],
+  "amenities": [
+    "高速Wi-Fi",
+    "有線LAN",
+    "無料駐車場（15台）",
+    "セルフチェックイン（4言語対応）",
+    "スマートロック",
+    "電子レンジ",
+    "自動販売機",
+    "屋外喫煙所",
+    "個別空調",
+    "冷蔵庫"
+  ],
+  "roomAmenities": [
+    "高速Wi-Fi",
+    "有線LAN",
+    "スマートテレビ",
+    "冷蔵庫",
+    "電気ケトル",
+    "ユニットバス",
+    "個別空調",
+    "ドライヤー",
+    "ワークデスク"
+  ],
   "company": {
     "name": "株式会社Now Resort",
     "representative": "山本 亮",
