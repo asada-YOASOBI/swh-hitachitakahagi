@@ -139,7 +139,7 @@ ${sitemapPages.map((p) => `  <url>
     <image:image><image:loc>${ORIGIN}${img.src}</image:loc><image:title>${escapeHtml(img.title)}</image:title></image:image>`).join('')}
   </url>`).join('\n')}
   <url>
-    <loc>${ORIGIN}/terms.html</loc>
+    <loc>${ORIGIN}/terms/</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

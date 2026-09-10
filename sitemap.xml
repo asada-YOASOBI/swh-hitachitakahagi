@@ -57,7 +57,7 @@
     <image:image><image:loc>https://www.smartworkhotel.jp/images/bathroom.jpg</image:loc><image:title>ユニットバス</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.smartworkhotel.jp/terms.html</loc>
+    <loc>https://www.smartworkhotel.jp/terms/</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

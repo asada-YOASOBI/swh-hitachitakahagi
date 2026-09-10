@@ -59,6 +59,6 @@
 - よくある質問: https://www.smartworkhotel.jp/faq/
 - 法人予約・長期滞在: https://www.smartworkhotel.jp/corporate/
 - 運営会社・施設概要: https://www.smartworkhotel.jp/company/
-- 宿泊約款・利用規則: https://www.smartworkhotel.jp/terms.html
-- 特定商取引法に基づく表記: https://www.smartworkhotel.jp/terms.html#tokusho
+- 宿泊約款・利用規則: https://www.smartworkhotel.jp/terms/
+- 特定商取引法に基づく表記: https://www.smartworkhotel.jp/terms/#tokusho
 - 全文: https://www.smartworkhotel.jp/llms-full.txt
