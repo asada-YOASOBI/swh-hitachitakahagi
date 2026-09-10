@@ -177,8 +177,11 @@ body.menu-open .overlay{opacity:1;visibility:visible;transition:opacity .45s var
 .fv__scroll{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--color-on-dark);font-family:var(--font-en);font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
 .fv__scroll i{display:block;width:1px;height:48px;background:currentColor;transform-origin:top}
 
-/* ---------- ご予約の前に（F型） ---------- */
+/* ---------- ご予約の前に（F型）。必ず読ませたいので画面いっぱいに取り、スクロールで一度止める（js/main.js の noticePin） ---------- */
+.notice{min-height:100svh;display:flex;align-items:center;padding-block:80px}
+.notice .container{width:100%}
 .notice__grid{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+.notice .rows__item b{text-decoration:underline;text-decoration-color:var(--color-accent);text-decoration-thickness:2px;text-underline-offset:.4em;text-decoration-skip-ink:none}
 .notice .rows__item{grid-template-columns:1fr auto}
 .notice .rows__item .link-line{font-size:12px}
 

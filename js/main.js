@@ -137,6 +137,19 @@
     });
   }
 
+  // ---------- ご予約の前に：画面に固定して3項目を順に出す（必ず読ませるための「止まり」） ----------
+  function noticePin() {
+    var notice = document.querySelector('.notice');
+    if (!notice) return;
+    var items = notice.querySelectorAll('.rows__item');
+    var timeline = gsap.timeline({
+      scrollTrigger: { trigger: notice, start: 'top top', end: '+=90%', pin: true, scrub: 0.5, anticipatePin: 1 },
+    });
+    timeline.from(items, { autoAlpha: 0, y: 24, duration: 0.6, stagger: 0.5, ease: 'power2.out' });
+    // 3つ目が出そろってからも少し止める
+    timeline.to({}, { duration: 0.8 });
+  }
+
   // ---------- 巨大数字のカウントアップ ----------
   function countUp() {
     document.querySelectorAll('[data-count]').forEach(function (el) {
@@ -153,6 +166,7 @@
 
   document.fonts.ready.then(function () {
     fvMotion();
+    noticePin();
     countUp();
     gsap.matchMedia().add('(min-width: 901px)', function () { parallaxPhotos(); });
     ScrollTrigger.refresh();
