@@ -171,12 +171,12 @@
   <a href="https://booking.smartworkhotel.jp/" class="sp-bar__book" data-tripla-booking-widget="search">空室を検索・予約する<span class="en">↗</span></a>
 </div>
 
-<script src="/js/main.js?v=20260910" defer></script>
+<script src="/js/main.js?v=20260911" defer></script>
 <script>
 // 動き（GSAP・Lenis）は描画が終わってから読む。tripla の予約ウィジェットとチャットは、最初の操作か、読み込み完了の6秒後に読む。
 // どちらも読み込む前は、予約ボタンが booking.smartworkhotel.jp へそのまま遷移する。
 (function () {
-  var VERSION = '20260910';
+  var VERSION = '20260911';
   function load(src, done) { var s = document.createElement('script'); s.src = src; s.onload = done; document.body.appendChild(s); }
   function startMotion() {
     if (document.documentElement.classList.contains('no-motion')) return;

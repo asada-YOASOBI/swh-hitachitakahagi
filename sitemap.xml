@@ -2,45 +2,45 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.smartworkhotel.jp/access/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/company/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/corporate/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/facilities/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image><image:loc>https://www.smartworkhotel.jp/images/amenity.jpg</image:loc><image:title>アメニティ</image:title></image:image>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/faq/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/guide/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image><image:loc>https://www.smartworkhotel.jp/images/checkin.jpg</image:loc><image:title>4言語対応のセルフチェックイン端末</image:title></image:image>
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
     <image:image><image:loc>https://www.smartworkhotel.jp/images/exterior-night.jpg</image:loc><image:title>スマートワークホテル日立高萩 外観（夕景）</image:title></image:image>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.smartworkhotel.jp/rooms/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image><image:loc>https://www.smartworkhotel.jp/images/room-bed.jpg</image:loc><image:title>ダブルルーム。ダブルベッドとワークデスク</image:title></image:image>
