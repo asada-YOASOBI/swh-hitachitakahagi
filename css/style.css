@@ -299,6 +299,11 @@ body.is-sub.menu-open .header .brand img{filter:brightness(0) invert(1)}
 .direct .btn{margin-top:40px}
 .direct__note{margin-top:20px;font-size:13px;color:var(--color-text-soft);letter-spacing:.06em}
 
+/* ---------- 0秒チェックイン ---------- */
+.zero .rows{margin-top:36px}
+.zero__note{margin-top:20px;font-size:13px;line-height:1.9;color:var(--color-text-soft);letter-spacing:.04em;text-wrap:pretty}
+.smart .link-row{margin-top:36px}
+
 /* ---------- よくある質問 ---------- */
 .faq__list{margin-top:48px;border-top:1px solid var(--color-line)}
 .faq__list details{border-bottom:1px solid var(--color-line)}

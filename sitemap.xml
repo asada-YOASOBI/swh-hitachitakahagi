@@ -57,8 +57,15 @@
     <image:image><image:loc>https://www.smartworkhotel.jp/images/bathroom.jpg</image:loc><image:title>ユニットバス</image:title></image:image>
   </url>
   <url>
+    <loc>https://www.smartworkhotel.jp/zero-checkin/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://www.smartworkhotel.jp/images/checkin.jpg</image:loc><image:title>4言語対応のセルフチェックイン端末</image:title></image:image>
+  </url>
+  <url>
     <loc>https://www.smartworkhotel.jp/terms/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

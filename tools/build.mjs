@@ -34,7 +34,7 @@ const hotel = {
   image: site.images.map((p) => `${ORIGIN}${p}`),
   logo: `${ORIGIN}/images/brand-mark.png`,
   email: site.email,
-  priceRange: site.priceRange, currenciesAccepted: 'JPY', paymentAccepted: 'Credit Card',
+  priceRange: site.priceRange, currenciesAccepted: 'JPY', paymentAccepted: 'オンライン決済（各予約サイトでのクレジットカード決済ほか）',
   foundingDate: site.openingDate,
   petsAllowed: false, smokingAllowed: false,
   numberOfRooms: site.rooms,
@@ -140,7 +140,7 @@ ${sitemapPages.map((p) => `  <url>
   </url>`).join('\n')}
   <url>
     <loc>${ORIGIN}/terms/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

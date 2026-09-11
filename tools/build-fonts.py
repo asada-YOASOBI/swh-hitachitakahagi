@@ -23,7 +23,7 @@ CACHE_DIR = os.path.join(ROOT, "tools", "font-src")
 # トップに出る文字＝core（1ファイル）、それ以外のページにだけ出る文字＝ext（unicode-range で必要なときだけ読む）
 CORE_FILES = ["index.html"]
 EXT_FILES = ["rooms/index.html", "guide/index.html", "facilities/index.html", "access/index.html",
-             "faq/index.html", "corporate/index.html", "company/index.html", "404.html", "terms.html", "llms.txt"]
+             "faq/index.html", "zero-checkin/index.html", "corporate/index.html", "company/index.html", "404.html", "terms.html", "llms.txt"]
 RANGE_FILE = os.path.join(ROOT, "fonts", "ext-unicode-range.txt")
 
 # Google Fonts が旧UAに返す非分割WOFF（css?family=...&subset=japanese で取る。
